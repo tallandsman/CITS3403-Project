@@ -36,26 +36,27 @@ vertically. */
 
 /* The general styling to create a "panel" when applied to an element. */
 .panel {
-    background-color: rgb(134, 200, 250);
+    background-color: #f1f0f0;
     margin: 1vw;
     box-shadow: 0 1rem 3rem rgba(0,0,0,.35);
 }
 
 /* Adds a soft border to a container/element */
 .softBorder {
-    border: 0.1vw solid rgb(111, 171, 216);
+    border: 0.1vw solid #ebeaea;
     border-radius: 1vw;
 }
 
 /* Adds a hard border to a container/element */
 .hardBorder {
-    border: 0.2vw solid rgb(96, 138, 170);
+    border: 0.2vw solid #ebeaea;
     border-radius: 1vw;
 }
 
 /* Giving all button elements a margin */
 .buttonBorder {
-    border: 0.1vw solid rgb(111, 171, 216);
+    background-color: #f1f0f0;
+    border: 0.1vw solid #ebeaea;
     border-radius: 0.5vw;
     margin: 10px;
 }
@@ -81,13 +82,13 @@ size changes. */
 
 /* The styling of each cell when not clicked/revealed */
 .unidentified {
-    background-color: #eeeeee;
-    border: 0.2vw outset #d1d1d1;
+    background-color: #c5c5c5;
+    border: 0.2vw outset #b1b1b1;
     box-shadow: 0.2vw 0.2vw 0.2vw rgba(0,0,0,.35);
 }
 /* The styling of each unrevealed cell upon mouse over */
 .unidentified:hover {
-    background-color: #cfcfcf;
+    background-color: #9c9c9c;
 }
 
 /* Changing the size of the game board table to take up a 
