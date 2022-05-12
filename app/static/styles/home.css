@@ -1,0 +1,208 @@
+/* GENERAL LAYOUT STYLING */
+
+/* The element this class is applied to will be centered
+vertically. */
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+/* In order to center an element horizontally, apply the classes
+".d-flex" and "justify-content-center" to the parent container */
+
+/* Causes the element to maintain repsonsive square styling */
+.square:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+
+/* Aligns a text element within a container in the vertical center */
+.valign-text {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Aligns a text element within a container in the horizontal center */
+.halign-text {
+    text-align: center;
+}
+
+/* -------------------------------------------------------------------------------------- */
+
+/* GENERAL DESIGN STYLING */
+
+/* The general styling to create a "panel" when applied to an element. */
+.panel {
+    background-color: #f1f0f0;
+    margin: 1vw;
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.35);
+}
+
+/* Adds a soft border to a container/element */
+.softBorder {
+    border: 0.1vw solid #ebeaea;
+    border-radius: 1vw;
+}
+
+/* Adds a hard border to a container/element */
+.hardBorder {
+    border: 0.2vw solid #ebeaea;
+    border-radius: 1vw;
+}
+
+/* Giving all button elements a margin */
+.buttonBorder {
+    background-color: #f1f0f0;
+    border: 0.1vw solid #ebeaea;
+    border-radius: 0.5vw;
+    margin: 10px;
+}
+
+/* -------------------------------------------------------------------------------------- */
+
+/* GAME BOARD SPECIFIC STYLING */
+
+/* Class that sizes each cell of the game board depending on the number
+of cells to be created. This style will need to be adjusted as the board
+size changes. */
+.boardCell {
+    width: 10%;
+    height: 10%;
+}
+
+/* Styling of the div that represents each cell of the game board */
+.cellDiv {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.0vw;
+}
+
+/* The styling of each cell when not clicked/revealed */
+.unidentified {
+    background-color: #c5c5c5;
+    border: 0.2vw outset #b1b1b1;
+    box-shadow: 0.2vw 0.2vw 0.2vw rgba(0,0,0,.35);
+}
+/* The styling of each unrevealed cell upon mouse over */
+.unidentified:hover {
+    background-color: #9c9c9c;
+}
+
+/* Changing the size of the game board table to take up a 
+specified amount of its panel that it is within. */
+#boardTable {
+    width: 85%;
+    height: 85%;
+}
+
+/* -------------------------------------------------------------------------------------- */
+
+/* GAME INFO BANNER SPECIFIC STYLING */
+
+#timerText {
+    font-size: 2vw;
+    margin: 1vw;
+}
+
+#contentDiv {
+    position: relative;
+    height: 100vh;
+}
+
+
+/* Navigation bar */
+nav {
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0.4vw 0.4vw 0.4vw rgba(0,0,0,0.2);
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 1vw 0;
+    display: flex;
+    align-items: center;
+}
+.menu_btn_box {
+    text-align: left;
+}
+.menu_btn {
+    background-color: #fff;
+    border: 0.1vw solid #888;
+    border-radius: 0.5vw;
+    padding: 0.6vw 0.8vw;
+    color: #888;
+    margin: 0 3vw;
+}
+.menu_btn:hover {
+    color: #fff;
+    background-color: rgb(93, 171, 230);
+    border-color: rgb(93, 171, 230);
+}
+.nav_icon {
+    margin: 0 5px 2px 0;
+}
+.down_menu {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background-color: #fff;
+    border: 0.05vw solid rgba(0, 0, 0, 0.15);
+    padding: 2vw 0 5vw;
+    font-size: 1rem;
+    list-style: none;
+    display: none;
+}
+/* When menu bottom is clicked, it will have the class named show */
+.show {
+    display: block;
+}
+.down_item {
+    text-decoration: none;
+    color: #444;
+    display: block;
+    padding: 0.7vw 7vw 0.7vw 3vw;
+}
+.down_item:hover {
+    text-decoration: none;
+    color: #fff;
+    background-color: rgb(93, 171, 230);
+    opacity: 0.7;
+    transition: 0.2s;
+}
+h1 {
+    text-align: center;
+    line-height: 100%;
+}
+h1>a {
+    font-size: 3vw;
+    color: rgb(93, 171, 230);
+    text-decoration: none;
+}
+h1>a:hover {
+    color: #888;
+    text-decoration: none;
+}
+.sign_in_box {
+    text-align: right;
+}
+.sign_in_btn {
+    font-size: 1.5vw;
+    border: 0.1vw solid #888;
+    border-radius: 0.5vw;
+    padding: 0.8vw 2vw;
+    color: #444;
+    margin: 0 3vw;
+}
+.sign_in_btn:hover {
+    color: #fff;
+    background-color: rgb(93, 171, 230);
+    border-color: rgb(93, 171, 230);
+    text-decoration: none;
+}
+
+
