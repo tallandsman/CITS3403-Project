@@ -5,185 +5,274 @@ const ROW = 10;
 const COL = 10;
 const NUMSHARK = 10;
 
-/**
- * This class represents a single tile of the game board
+/** 
+ * Constructor for a 'Tile' object.
  */
-class Tile {
-    // Constructor for a tile object
-    constructor() {
-        this.revealed = false;
-        this.number = 0;
-    }
+function Tile (row, col) {
 
-    // This function reveals the tile object
-    reveal() {
-        this.revealed = true;
-    }
+    // Logical row and column for each tile within the array.
+    this.row = row;
+    this.col = col;
+
+    // Boolean representing whether or not the tile is revealed.
+    this.mystery = true;
+
+    // Boolean representing whether or not the tile is a 'shark'.
+    this.shark = false;
+
+    // Integer representing the number of 'sharks' in its adjacent 8 tiles.
+    this.number = 0;
 }
 
-function gameOver() {
-    alert("Game Over");
-}
+// Method that updates the css styling of the html element representing 
+// the tile based on the tiles current state.
+Tile.prototype.updateStyle = function() {
 
-function tileClick() {
-    console.log("Hello");
-    let rowInd = this.parentNode.closest("tr").rowIndex;
-    let colInd = this.parentNode.cellIndex;
+    // Using the logical row and column to reference the html elements representing the tile.
+    let cellDiv = document.getElementById("boardTable").rows[this.row].cells[this.col].children[0];
 
-    let tile = window.board[rowInd][colInd];
 
-    if (tile.number == -1) {
-        // Game Over
-        gameOver();
+    // Adding styles to the html element depending on it's current state.
+    cellDiv.classList = "cellDiv";
+    if (this.mystery) {
+        cellDiv.classList.add("unidentified");
     }
     else {
-        console.log("Hi");
-        revealTile(rowInd, colInd, tile, this);
+        cellDiv.classList.add("identified");
     }
 }
+
 /**
- * Reveals the selected tile and adjust its styling accordingly.
+ * Method that reveals changes the mystery state of the tile 
+ * and then updates its corresponding HTML element's styling.
  */
-function revealTile(row, col, tile, divElement) {
-    console.log("row: " + row);
-    console.log("col: " + col);
-    console.log("tileNumber: " + tile.number);
-    if (tile.number == -1) {
-        // Ignore
-    }
-    else {
-        tile.revealed = true;
-        divElement.classList.remove("unidentified");
-        divElement.classList.add("identified");
+Tile.prototype.reveal = function() {
 
-        if (tile.number > 0) {
-            let para = document.createElement("h4");
-            let text = document.createTextNode(tile.number);
-            
-            para.appendChild(text);
-            para.classList.add("cellNum");
-            para.classList.add("halign-text");
+    // Reveals the current tile and updates it's style.
+    this.mystery = false;
+    this.updateStyle();
 
-            divElement.appendChild(para);
-        }
+    // If the number of the revealed tile is 0, flood fill 
+    // algorithm is enabled creating a waterfall effect.
+    if (this.number == 0) {
 
-        if (tile.number == 0) {
-            for (let x=row-1; x<=row+1; x++) {
-                if (x < 0 || x >= ROW) {
-                    continue;
-                }
-                for (let y=col-1; y <= col+1; y++) {
-                    if (y < 0 || y >=COL) {
-                        continue;
-                    }
-                    adjTile = window.board[x][y];
-                    if (adjTile.number != -1 && !adjTile.revealed) {
-                        revealTile(x, y, adjTile, document.getElementById("boardTable").rows[x].cells[y].children[0]);
+        // Iterates through all of the neighbouring tiles.
+        for (let xoff=-1; xoff<=1; xoff++) {
+            for (let yoff=-1; yoff<=1; yoff++) {
+                let x = this.row + xoff;
+                let y = this.col + yoff;
+
+                // Skips the current tile.
+                if (x != this.row || y != this.col) {
+
+                    // Skips any set of row/col that do not exist.
+                    if (x >= 0 && x < ROW && y >= 0 && y < COL) {
+                        let neighbour = window.board[x][y];
+
+                        // If the neighbour is a shark or has already been 
+                        // revealed it is skipped.
+                        if (neighbour.mystery && !neighbour.shark) {
+                            neighbour.reveal();
+                        }
                     }
                 }
             }
         }
     }
-    
+}
+
+/**
+ * Will take a 'td' elements' 'div' child and find the corresponding 
+ * tile's logical row and column.
+ */
+function tileClick() {
+
+    // Uses the element to find the corresponding tile's logical 
+    // row and column.
+    let rowInd = this.parentNode.closest("tr").rowIndex;
+    let colInd = this.parentNode.cellIndex;
+    let tile = window.board[rowInd][colInd];
+
+    // Action changes depending on the tile clicked.
+    if (tile.shark) {
+        // GAME OVER
+        gameOver();
+    }
+    else {
+        tile.reveal();
+    }
+
     
 }
 
 /**
- * This function initialises a randomised game state. Creates and 
- * populates all tiles.
+ * Function that triggers the game over set of actions for when 
+ * the timer runs out or when a shark is clicked.
  */
-function initTiles() {
+function gameOver() {
+    revealBoard();
+}
+
+/**
+ * Function that reveals the whole board.
+ */
+function revealBoard() {
+
+    // Iterates through each tile.
+    for (let row=0; row<ROW; row++) {
+        for (let col=0; col<COL; col++) {
+            window.board[row][col].mystery = false;
+            window.board[row][col].updateStyle();
+        }
+    }
+}
+
+/**
+ * Create a 2D array to hold each cell's tile.
+ */
+function makeBoard() {
+
+    // Creating an array with ROW number of spaces to represent 
+    // each row of the board.
+    let board = new Array(ROW);
+    for (let row=0; row<ROW; row++) {
+
+        // Each element of the array is an array with COL 
+        // numbers of spaces to represent each column.
+        board[row] = new Array(COL);
+        for (let col=0; col<COL; col++) {
+
+            // A 'Tile' object is created in each cell of
+            // the game board.
+            board[row][col] = new Tile(row, col);
+        }
+    }
+    return board;
+}
+
+/**
+ * Create the html elements that represent the board
+ */
+function makeHTMLTable() {
+    let table = document.getElementById("boardTable");
+
+    // Creating ROW amount of 'tr' elements
+    for (let row=0; row<ROW; row++) {
+        let tr = document.createElement("tr");
+
+        // Adding '.boardRow' class for styling purposes
+        tr.classList.add("boardRow");
+
+        // Creating COL amount of 'td' elements, each with a 'div' inside, for each row.
+        for (let col=0; col<COL; col++) {
+
+            let td = document.createElement("td");
+            let div = document.createElement("div");
+            
+            // Adding classes for styling purposes
+            td.classList.add("boardCell");
+            
+            // Adding text elements to all numbered cells
+            let tile = window.board[row][col];
+            if (tile.number != 0 && !tile.shark) {
+                let h4 = document.createElement("h4");
+                let text = document.createTextNode(tile.number);
+
+                h4.classList = "cellNum halign-text";
+    
+                h4.appendChild(text);
+                div.appendChild(h4);
+            }
+            // Adds the shark image for shark tiles.
+            else if (tile.shark) {
+                let img = document.createElement("img");
+                img.src = "../static/images/sharkIcon.png";
+
+                img.classList.add("cell-img");
+
+                div.appendChild(img);
+            }
+
+            td.appendChild(div);
+            tr.appendChild(td);
+        }
+        table.appendChild(tr);
+    }
+}
+
+/**
+ * Function that will take an integer representing the location of a shark 
+ * and implement it into the game board.
+ */
+function addShark(pos) {
+
+    // Using the overall position value to calculate the logical row and column.
+    let row = Math.floor(pos/ROW);
+    let col = pos%ROW;
+
+    let board = window.board;
+
+    // Changing the tile's 'shark' property to true
+    board[row][col].shark = true;
+    board[row][col].number = "S";
+
+    // Changing the tile's 'number' property to reflect 
+    // the number of sharks around it.
+    for (let xoff=-1; xoff<=1; xoff++) {
+        for (let yoff=-1; yoff<=1; yoff++) {
+            let x = row + xoff;
+            let y = col + yoff;
+            if (x != row || y != col) {
+                if (x >= 0 && x < ROW && y >= 0 && y < COL) {
+                    if (!board[x][y].shark) {
+                        board[x][y].number++;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Function that will generate a set of 'sharks' and then 
+ * updates the relevant Tile object information.
+ */
+function genShark() {
 
     // A constant variable that represents the number of tiles on the game board.
     const MAXTILES = ROW * COL;
 
-    // Randomly populating the board with a set number of sharks.
-    window.sharkArr = new Array(NUMSHARK);
-    let sharkArr = window.sharkArr;
+    // Uses an array of integers ranging from 0 to 1 less than the maximum 
+    // number of tiles to represent the sharks and their position in the board.
+    window.sharks = new Array(NUMSHARK);
     for (let shark=0; shark<NUMSHARK; shark++) {
-        tile = -1;
-        while (sharkArr.includes(tile) || tile == -1) {
-            tile = Math.floor(Math.random() * MAXTILES);
-        }
-        sharkArr[shark] = tile;
+        do {
+            // Position of sharks are randomly generated and duplicate 
+            // positions are not used to ensure correct number of sharks.
+            position = Math.floor(Math.random() * MAXTILES);
+        } while (window.sharks.includes(position));
+        window.sharks[shark] = position;
+        addShark(position);
     }
-
-    /**
-     * Initialisation of the 2D array that will hold the 
-     * collection of tile objects.
-     */
-    window.board = new Array(ROW);
-    let board = window.board;
-    for (let row = 0; row < ROW; row++) {
-        board[row] = new Array(COL);
-        for (let col = 0; col < COL; col++) {
-            board[row][col] = new Tile()
-            if (sharkArr.includes( (row)*10 + col )) {
-                board[row][col].number = -1;
-            }
-        }
-    }
-
-    // Adjusting the adjacency numbers based on the sharks generated.
-    for (let shark=0; shark<NUMSHARK; shark++) {
-        let sharkRow = Math.floor(sharkArr[shark]/10);
-        let sharkCol = sharkArr[shark]%10;
-        for (let row=sharkRow-1; row <= sharkRow+1; row++) {
-            console.log(row);
-            if (row < 0 || row >= ROW) {
-                continue;
-            }
-            for (let col=sharkCol-1; col <= sharkCol+1; col++) {
-                if (col < 0 || col >=COL) {
-                    continue;
-                }
-                if (board[row][col].number != -1) {
-                    board[row][col].number++;
-                }
-            }
-        }
-    }
+    console.log(window.sharks);
 }
 
+/**
+ * Initialising the pages default game state
+ */
 function init() {
 
-    initTiles();
-
-    var board = window.board;
-
-    /**
-     * Creation of the html elements that represent the game board.
-     */
-    let grid = document.getElementById("boardTable");
-
-    // Creating 10 rows
+    window.board = makeBoard();
+    genShark();
+    makeHTMLTable();
+    
+    // Initially sets the styling for the board.
     for (let row=0; row<ROW; row++) {
-        let gridRow = document.createElement("tr");
-        gridRow.classList.add("boardRow");
-
-        // Creating 10 cells in each row
         for (let col=0; col<COL; col++) {
-            let cell = document.createElement("td");
-            let div = document.createElement("div");
-            
-            cell.classList.add("boardCell");
-            div.classList.add("cellDiv");
-            if (board[row][col].revealed) {
-                div.classList.add("identified");
-            }
-            else {
-                div.classList.add("unidentified");
-            }
-            
-            cell.appendChild(div);
-            gridRow.appendChild(cell);
-
+            window.board[row][col].updateStyle();
         }
-        grid.appendChild(gridRow);
     }
-    console.log(board);
 
-
+    // Event listener for click events.
     $('.cellDiv').on('click', tileClick);
 }
-
