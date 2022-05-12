@@ -21,10 +21,71 @@ class Tile {
     }
 }
 
+function gameOver() {
+    alert("Game Over");
+}
+
+function tileClick() {
+    console.log("Hello");
+    let rowInd = this.parentNode.closest("tr").rowIndex;
+    let colInd = this.parentNode.cellIndex;
+
+    let tile = window.board[rowInd][colInd];
+
+    if (tile.number == -1) {
+        // Game Over
+        gameOver();
+    }
+    else {
+        console.log("Hi");
+        revealTile(rowInd, colInd, tile, this);
+    }
+}
 /**
- * Updates the html elements to reflect the current state of the board.
+ * Reveals the selected tile and adjust its styling accordingly.
  */
-function updateBoard() {
+function revealTile(row, col, tile, divElement) {
+    console.log("row: " + row);
+    console.log("col: " + col);
+    console.log("tileNumber: " + tile.number);
+    if (tile.number == -1) {
+        // Ignore
+    }
+    else {
+        tile.revealed = true;
+        divElement.classList.remove("unidentified");
+        divElement.classList.add("identified");
+
+        if (tile.number > 0) {
+            let para = document.createElement("h4");
+            let text = document.createTextNode(tile.number);
+            
+            para.appendChild(text);
+            para.classList.add("cellNum");
+            para.classList.add("halign-text");
+
+            divElement.appendChild(para);
+        }
+
+        if (tile.number == 0) {
+            for (let x=row-1; x<=row+1; x++) {
+                if (x < 0 || x >= ROW) {
+                    continue;
+                }
+                for (let y=col-1; y <= col+1; y++) {
+                    if (y < 0 || y >=COL) {
+                        continue;
+                    }
+                    adjTile = window.board[x][y];
+                    if (adjTile.number != -1 && !adjTile.revealed) {
+                        revealTile(x, y, adjTile, document.getElementById("boardTable").rows[x].cells[y].children[0]);
+                    }
+                }
+            }
+        }
+    }
+    
+    
 }
 
 /**
@@ -37,7 +98,8 @@ function initTiles() {
     const MAXTILES = ROW * COL;
 
     // Randomly populating the board with a set number of sharks.
-    let sharkArr = new Array(NUMSHARK);
+    window.sharkArr = new Array(NUMSHARK);
+    let sharkArr = window.sharkArr;
     for (let shark=0; shark<NUMSHARK; shark++) {
         tile = -1;
         while (sharkArr.includes(tile) || tile == -1) {
@@ -46,20 +108,18 @@ function initTiles() {
         sharkArr[shark] = tile;
     }
 
-    console.log(sharkArr)
-
     /**
      * Initialisation of the 2D array that will hold the 
      * collection of tile objects.
      */
-    let board = new Array(ROW);
+    window.board = new Array(ROW);
+    let board = window.board;
     for (let row = 0; row < ROW; row++) {
         board[row] = new Array(COL);
         for (let col = 0; col < COL; col++) {
             board[row][col] = new Tile()
             if (sharkArr.includes( (row)*10 + col )) {
                 board[row][col].number = -1;
-                board[row][col].reveal();
             }
         }
     }
@@ -67,7 +127,6 @@ function initTiles() {
     // Adjusting the adjacency numbers based on the sharks generated.
     for (let shark=0; shark<NUMSHARK; shark++) {
         let sharkRow = Math.floor(sharkArr[shark]/10);
-        console.log(sharkRow);
         let sharkCol = sharkArr[shark]%10;
         for (let row=sharkRow-1; row <= sharkRow+1; row++) {
             console.log(row);
@@ -84,15 +143,13 @@ function initTiles() {
             }
         }
     }
-
-    updateBoard();
-
-    return board;
 }
 
 function init() {
 
-    let board = initTiles();
+    initTiles();
+
+    var board = window.board;
 
     /**
      * Creation of the html elements that represent the game board.
@@ -108,17 +165,7 @@ function init() {
         for (let col=0; col<COL; col++) {
             let cell = document.createElement("td");
             let div = document.createElement("div");
-            let para = document.createElement("h4");
-            let number;
-            if (board[row][col].number != 0) {
-                number = board[row][col].number;
-            }
-            else {
-                number = "";
-            }
-            let text = document.createTextNode(number);
-            para.classList.add("cellNum");
-            para.classList.add("halign-text");
+            
             cell.classList.add("boardCell");
             div.classList.add("cellDiv");
             if (board[row][col].revealed) {
@@ -128,8 +175,6 @@ function init() {
                 div.classList.add("unidentified");
             }
             
-            para.appendChild(text);
-            div.appendChild(para);
             cell.appendChild(div);
             gridRow.appendChild(cell);
 
@@ -138,6 +183,7 @@ function init() {
     }
     console.log(board);
 
-    //
+
+    $('.cellDiv').on('click', tileClick);
 }
 
