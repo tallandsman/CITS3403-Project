@@ -186,7 +186,7 @@ function makeHTMLTable() {
             // Adds the shark image for shark tiles.
             else if (tile.shark) {
                 let img = document.createElement("img");
-                img.src = "../static/images/sharkIcon.png";
+                img.src = "../static/images/shark_nobg.png";
 
                 img.classList.add("cell-img");
 
