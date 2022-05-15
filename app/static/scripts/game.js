@@ -22,6 +22,79 @@ function Tile (row, col) {
 
     // Integer representing the number of 'sharks' in its adjacent 8 tiles.
     this.number = 0;
+
+    // Boolean representing whether or not the tile element has been added
+    // as an HTML element.
+    this.elementShown = false;
+
+    // Boolean representing whether or not the tile is 'flagged'.
+    this.flag = false;
+}
+
+/**
+ * Method that will add the HTML image element of the flag
+ * to the div.
+ */
+Tile.prototype.addFlag = function() {
+
+    // Uses the tile object information to find the corresponding html element.
+    let cellDiv = document.getElementById("boardTable").rows[this.row].cells[this.col].children[0];
+    if (this.flag) {
+
+        let img = document.createElement("img");
+        img.src = "../static/images/buoy-nobg.png";
+
+        // Adding the classes to the image for it to be styled in the cell.
+        img.classList.add("cell-img");
+        img.classList.add("flag");
+
+        cellDiv.appendChild(img);
+        this.elementShown = true;
+    }
+}
+
+/** 
+ * Method that will remove all children elements of the tile div element.
+ */
+Tile.prototype.removeElement = function() {
+    
+    // Uses the tile object information to find the corresponding html element.
+    let cellDiv = document.getElementById("boardTable").rows[this.row].cells[this.col].children[0];
+    cellDiv.innerHTML = "";
+    this.elementShown = false;
+}
+
+/**
+ * Method that adds the corresponding html elements to the tile.
+ */
+Tile.prototype.addNum = function() {
+
+    // Uses the tile object information to find the corresponding html element.
+    let cellDiv = document.getElementById("boardTable").rows[this.row].cells[this.col].children[0];
+
+    // If the tile has a non-zero number but it isn't currently shown.
+    if (this.number != 0 && !this.shark && !this.elementShown) {
+        let h4 = document.createElement("h4");
+        let text = document.createTextNode(this.number);
+
+        h4.classList = "cellNum halign-text";
+
+        h4.appendChild(text);
+        cellDiv.appendChild(h4);
+
+        this.elementShown = true;
+    }
+
+    // If the tile is a shark.
+    else if (this.shark) {
+        let img = document.createElement("img");
+        img.src = "../static/images/sharkIcon.png";
+
+        img.classList.add("cell-img");
+
+        cellDiv.appendChild(img);
+        this.elementShown = true;
+    }
 }
 
 // Method that updates the css styling of the html element representing 
@@ -31,14 +104,29 @@ Tile.prototype.updateStyle = function() {
     // Using the logical row and column to reference the html elements representing the tile.
     let cellDiv = document.getElementById("boardTable").rows[this.row].cells[this.col].children[0];
 
-
     // Adding styles to the html element depending on it's current state.
     cellDiv.classList = "cellDiv";
     if (this.mystery) {
+
         cellDiv.classList.add("unidentified");
+
+        // If the tile is flagged but there is no html element children.
+        if (this.flag && cellDiv.children.length == 0) {
+            this.addFlag();
+        }
+        // If the tile is not flagged but there is an html element child.
+        if (!this.flag && cellDiv.children.length != 0) {
+            this.removeElement();
+        }
     }
     else {
         cellDiv.classList.add("identified");
+
+        // Removes all html element children.
+        this.removeElement();
+
+        // Adds the shark image element or the number text node.
+        this.addNum();
     }
 }
 
@@ -51,6 +139,12 @@ Tile.prototype.reveal = function() {
     // Reveals the current tile and updates it's style.
     this.mystery = false;
     this.updateStyle();
+
+    window.revTiles++;
+    if (window.revTiles == (ROW*COL - NUMSHARK)) {
+        console.log("YAY WIN");
+        gameWin();
+    }
 
     // If the number of the revealed tile is 0, flood fill 
     // algorithm is enabled creating a waterfall effect.
@@ -72,7 +166,12 @@ Tile.prototype.reveal = function() {
                         // If the neighbour is a shark or has already been 
                         // revealed it is skipped.
                         if (neighbour.mystery && !neighbour.shark) {
-                            neighbour.reveal();
+
+                            // If the neighbour is a flag with a number, it is not 
+                            // flood fill revealed.
+                            if (!neighbour.flag || neighbour.number == 0) {
+                                neighbour.reveal();
+                            }
                         }
                     }
                 }
@@ -85,24 +184,70 @@ Tile.prototype.reveal = function() {
  * Will take a 'td' elements' 'div' child and find the corresponding 
  * tile's logical row and column.
  */
-function tileClick() {
+function tileLeftClick(event) {
+
+    let div = event.target.closest("div");
 
     // Uses the element to find the corresponding tile's logical 
     // row and column.
-    let rowInd = this.parentNode.closest("tr").rowIndex;
-    let colInd = this.parentNode.cellIndex;
+    let rowInd = div.parentNode.closest("tr").rowIndex;
+    let colInd = div.parentNode.cellIndex;
     let tile = window.board[rowInd][colInd];
 
     // Action changes depending on the tile clicked.
-    if (tile.shark) {
+    if (!tile.mystery) {
+        // ALREADY CLICKED
+        console.log("Already clicked");
+    }
+    else if (tile.flag) {
+        // FLAGGED
+        console.log("Flagged");
+    }
+    else if (tile.shark) {
         // GAME OVER
+        console.log("Game over");
         gameOver();
     }
     else {
         tile.reveal();
     }
+}
 
-    
+/**
+ * Will change the flag property of the tile to true.
+ */
+function tileRightClick(event) {
+    console.log("Right Click");
+
+    let div = event.target.closest("div");
+
+    // Uses the element to find the corresponding tile's logical 
+    // row and column.
+    let rowInd = div.parentNode.closest("tr").rowIndex;
+    let colInd = div.parentNode.cellIndex;
+    let tile = window.board[rowInd][colInd];
+
+    // Only has action if the tile is unrevealed.
+    if (tile.mystery && !tile.flag) {
+
+        // Turns the flag state of the tile to true.
+        tile.flag = true;
+        tile.updateStyle();
+    }
+    else if (tile.mystery && tile.flag) {
+
+        // Turns the flag state of the tile to false.
+        tile.flag = false;
+        tile.updateStyle();
+    }
+
+}
+
+/**
+ * Function that triggers the game winning set of actions.
+ */
+function gameWin() {
+
 }
 
 /**
@@ -121,6 +266,7 @@ function revealBoard() {
     // Iterates through each tile.
     for (let row=0; row<ROW; row++) {
         for (let col=0; col<COL; col++) {
+            window.board[row][col].flag = false;
             window.board[row][col].mystery = false;
             window.board[row][col].updateStyle();
         }
@@ -171,26 +317,34 @@ function makeHTMLTable() {
             
             // Adding classes for styling purposes
             td.classList.add("boardCell");
+
+            // // Adding the flag image to each element.
+            // let flag = document.createElement("img");
+            // flag.src = "../static/images/buoy.png";
+
+            // flag.classList.add("cell-img");
+
+            // div.appendChild(flag);
             
             // Adding text elements to all numbered cells
             let tile = window.board[row][col];
             if (tile.number != 0 && !tile.shark) {
-                let h4 = document.createElement("h4");
-                let text = document.createTextNode(tile.number);
+                // let h4 = document.createElement("h4");
+                // let text = document.createTextNode(tile.number);
 
-                h4.classList = "cellNum halign-text";
+                // h4.classList = "cellNum halign-text";
     
-                h4.appendChild(text);
-                div.appendChild(h4);
+                // h4.appendChild(text);
+                // div.appendChild(h4);
             }
             // Adds the shark image for shark tiles.
             else if (tile.shark) {
-                let img = document.createElement("img");
-                img.src = "../static/images/sharkIcon.png";
+                // let img = document.createElement("img");
+                // img.src = "../static/images/sharkIcon.png";
 
-                img.classList.add("cell-img");
+                // img.classList.add("cell-img");
 
-                div.appendChild(img);
+                // div.appendChild(img);
             }
 
             td.appendChild(div);
@@ -265,6 +419,8 @@ function init() {
     window.board = makeBoard();
     genShark();
     makeHTMLTable();
+
+    window.revTiles = 0;
     
     // Initially sets the styling for the board.
     for (let row=0; row<ROW; row++) {
@@ -273,6 +429,23 @@ function init() {
         }
     }
 
-    // Event listener for click events.
-    $('.cellDiv').on('click', tileClick);
+    // Event listener for any mousedown event.
+    $('.cellDiv').on('mousedown', function( event ) {
+        console.log(event.which)
+        switch (event.which) {
+            // Left mouse button
+            case 1:
+                tileLeftClick(event);
+                break;
+            // Right mouse button
+            case 3:
+                tileRightClick(event);
+                break;
+            default:
+        }
+    });
+
+    const noRightClick = document.getElementById("gameBoard");
+
+    noRightClick.addEventListener("contextmenu", e => e.preventDefault());
 }
