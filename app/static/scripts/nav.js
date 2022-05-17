@@ -15,33 +15,49 @@
 //     }
 // }
 
-// function menuDown() {
-//     var dropdown = document.getElementById("myMenuDown");
-//     dropdown.classList.toggle("show");
-// }
+
+window.onclick = function(event) {
+    console.log(event.target.matches('.menu_btn, .menu_btn *'))
+    if (!event.target.matches('.menu_btn, .menu_btn *')) {
+        
+        var dropdowns = document.getElementsByClassName("down_menu");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+}
+
+function menuDown() {
+    var dropdown = document.getElementById("myMenuDown");
+    dropdown.classList.toggle("show");
+}
 
 // function popupFunction() {
 //     var popup = document.getElementById("myPopup");
 //     popup.classList.toggle("show_popup");
 // }
 
-window.onclick = function(event) {
-    if(document.getElementById("myMenuDown").style.display == "block") {
-        console.log("display is block")
-        if(!event.target.matches(".menu_btn")) {
-            console.log("click not a menu button")
-            // if(!event.target.matches("#myMenuDown")) {
-            //     console.log("click not ul menu")
-            //     document.getElementById("myMenuDown").style.display = "none";
-            // }
-        }
-    }
-}
+// window.onclick = function(event) {
+//     if(document.getElementById("myMenuDown").style.display == "block") {
+//         console.log("display is block")
+//         if(!event.target.matches(".menu_btn")) {
+//             console.log("click not a menu button")
+//             // if(!event.target.matches("#myMenuDown")) {
+//             //     console.log("click not ul menu")
+//             //     document.getElementById("myMenuDown").style.display = "none";
+//             // }
+//         }
+//     }
+// }
 
 // onclick on the button to open down menu
-function menuDown() {
-    document.getElementById("myMenuDown").style.display = "block";
-}
+// function menuDown() {
+//     document.getElementById("myMenuDown").style.display = "block";
+// }
 
 // window.onclick = function(event) {
 //     if(document.getElementById("myPopup").style.visibility == "visible") {
