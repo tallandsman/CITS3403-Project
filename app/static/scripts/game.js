@@ -88,7 +88,7 @@ Tile.prototype.addNum = function() {
     // If the tile is a shark.
     else if (this.shark) {
         let img = document.createElement("img");
-        img.src = "../static/images/sharkIcon.png";
+        img.src = "../static/images/shark_nobg.png";
 
         img.classList.add("cell-img");
 
@@ -105,6 +105,8 @@ Tile.prototype.updateStyle = function() {
 
     // Using the logical row and column to reference the html elements representing the tile.
     let cellDiv = document.getElementById("boardTable").rows[this.row].cells[this.col].children[0];
+
+	document.getElementById("flagsLeft").innerHTML = window.flagsLeft;
 
     // Adding styles to the html element depending on it's current state.
     cellDiv.classList = "cellDiv";
@@ -140,6 +142,12 @@ Tile.prototype.reveal = function() {
 
     // Reveals the current tile and updates it's style.
     this.mystery = false;
+
+	if (this.flag) {
+		this.flag = false;
+		window.flagsLeft++;
+	}
+		
     this.updateStyle();
 
     window.revTiles++;
@@ -231,14 +239,18 @@ function tileRightClick(event) {
     // Only has action if the tile is unrevealed.
     if (tile.mystery && !tile.flag) {
 
-        // Turns the flag state of the tile to true.
-        tile.flag = true;
-        tile.updateStyle();
+		if (window.flagsLeft > 0) {
+			// Turns the flag state of the tile to true.
+			tile.flag = true;
+			window.flagsLeft--;
+			tile.updateStyle();
+		}
     }
     else if (tile.mystery && tile.flag) {
 
         // Turns the flag state of the tile to false.
         tile.flag = false;
+		window.flagsLeft++;
         tile.updateStyle();
     }
 
@@ -250,6 +262,8 @@ function tileRightClick(event) {
 function gameWin() {
     // Stop Timer
     document.getElementById("statusLine").innerHTML = "Status: BEACH IS SAFE";
+
+	stopTimer();
 }
 
 /**
@@ -258,6 +272,7 @@ function gameWin() {
  */
 function gameOver() {
     revealBoard();
+	stopTimer();
 }
 
 /**
@@ -302,7 +317,12 @@ function makeBoard() {
  * Create the html elements that represent the board
  */
 function makeHTMLTable() {
-    let table = document.getElementById("boardTable");
+
+	document.getElementById("gameBoard").innerHTML = "";
+	let table = document.createElement("table");
+	table.id = "boardTable";
+	table.classList.add("vertical-center");
+    document.getElementById("gameBoard").appendChild(table);
 
     // Creating ROW amount of 'tr' elements
     for (let row=0; row<ROW; row++) {
@@ -385,20 +405,33 @@ function genShark() {
 }
 
 function startTimer() {
-    var startTime = new Date().getTime();
-    console.log(startTime);
+    window.startTime = new Date().getTime();
+}
+
+function updateTimer() {
+	var stopTime = new Date().getTime();
+	var timeDiff = stopTime - window.startTime;
+	var minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+	var seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+	document.getElementById("timerMins").innerHTML = minutes.toLocaleString('en-US', {minimumIntegerDigits: 2});
+	document.getElementById("timerSecs").innerHTML = seconds.toLocaleString('en-US', {minimumIntegerDigits: 2});
+}
+
+function stopTimer() {
+	clearInterval(window.myInterval);
 }
 
 /**
  * Initialising the pages default game state
  */
-function init() {
+function gameStart() {
 
     window.board = makeBoard();
     genShark();
     makeHTMLTable();
 
     window.revTiles = 0;
+	window.flagsLeft = NUMSHARK;
 
     document.getElementById("sharkNum").innerHTML = NUMSHARK;
     
@@ -425,8 +458,39 @@ function init() {
     });
 
     const noRightClick = document.getElementById("gameBoard");
-
-    noRightClick.addEventListener("contextmenu", e => e.preventDefault());
+	noRightClick.addEventListener("contextmenu", e => e.preventDefault());
 
     startTimer();
+	window.myInterval = setInterval(updateTimer, 1000);
+}
+
+function restartGame() {
+	document.getElementById("timerMins").innerHTML = "00";
+	document.getElementById("timerSecs").innerHTML = "00";
+	document.getElementById("flagsLeft").innerHTML = "?";
+	document.getElementById("sharkNum").innerHTML = "?";
+	stopTimer();
+	init();
+}
+
+function init() {
+
+	document.getElementById("gameBoard").innerHTML = "";
+	let startDiv = document.createElement("div");
+	let startButton = document.createElement("button");
+	let textNode = document.createTextNode("Start");
+
+	startDiv.classList.add("vertical-center");
+
+	startButton.classList.add("softBorder");
+	startButton.classList.add("btn");
+	startButton.classList.add("btn-success");
+	startButton.id = "startButton";
+
+	startButton.appendChild(textNode);
+	startDiv.appendChild(startButton);
+	document.getElementById("gameBoard").appendChild(startDiv);
+	$("#startButton").on("click", gameStart);
+
+	$("#restartButton").on("click", restartGame);
 }
