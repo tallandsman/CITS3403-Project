@@ -37,6 +37,11 @@ vertically. */
     padding: 0!important;
 }
 
+/* adds padding to the top to avoid navbar overlaying other elements */
+.top-padding { 
+    padding-top: 100px; 
+}
+
 /* -------------------------------------------------------------------------------------- */
 
 /* GENERAL DESIGN STYLING */
