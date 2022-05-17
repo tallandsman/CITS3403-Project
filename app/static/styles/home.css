@@ -23,11 +23,18 @@ vertically. */
     position: relative;
     top: 50%;
     transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
 }
 
 /* Aligns a text element within a container in the horizontal center */
 .halign-text {
     text-align: center;
+}
+
+/* Removes the padding from an element */
+.no-padding {
+    padding: 0!important;
 }
 
 /* -------------------------------------------------------------------------------------- */
@@ -91,11 +98,46 @@ size changes. */
     background-color: #9c9c9c;
 }
 
+.unidentified * {
+    display: none;
+}
+
+/* The styling of each cell when clicked/revealed */
+.identified {
+    background-color: #c5c5c5;
+    border: 0.2vw inset #b1b1b1;
+    box-shadow: -0.2vw -0.2vw 0.2vw rgba(0,0,0,.35);
+}
+
+.identified * {
+    display: block;
+}
+
 /* Changing the size of the game board table to take up a 
 specified amount of its panel that it is within. */
 #boardTable {
     width: 85%;
     height: 85%;
+}
+
+/* Styles each paragraph element within a game board cell
+to fill the space of the div without expanding it. */
+.cellNum {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    font-size: 1vw;
+
+    position: relative;
+    top: 75%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+}
+
+.cell-img {
+    width: 100%;
+    height: 100%;
 }
 
 /* -------------------------------------------------------------------------------------- */
@@ -110,6 +152,49 @@ specified amount of its panel that it is within. */
 #contentDiv {
     position: relative;
     height: 100vh;
+}
+
+/* Popup How to play */
+.popup_howtoplay {
+    width: 100%;
+    height: 94%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(255,255,255,0.7);
+    z-index: 999;
+    margin-top: 4%;
+    visibility: hidden;
+}
+.box_howtoplay {
+    margin: 0 12.5%;
+    padding: 2vw 3vw;
+    background-color: #fff;
+    text-align: left;
+}
+.close_btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+h3 {
+    text-align: center;
+    font-size: 2.5vw;
+}
+h5 {
+    margin: 1vw 0;
+    font-size: 1.8vw;
+}
+.box_howtoplay>p {
+    text-align: justify;
+    font-size: 1.3vw;
+}
+hr {
+    border: 0.01vw solid #888;
+    margin: 0.1vw 0;
+}
+.show_popup {
+    visibility: visible;
 }
 
 
@@ -204,5 +289,6 @@ h1>a:hover {
     border-color: rgb(93, 171, 230);
     text-decoration: none;
 }
+
 
 

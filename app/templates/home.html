@@ -3,7 +3,7 @@
     <head>
         <!-- Setting the page's title and icon. -->
         <title>Shark Attack</title>
-        <link rel="icon" type="image/x-icon" href="sharkIcon.ico">
+        <link rel="icon" type="image/x-icon" href="../static/images/sharkIcon.ico">
 
         <!-- Linking any relevant libraries/CDN used. -->
 
@@ -30,7 +30,8 @@
         <link rel="stylesheet" href="../static/styles/home.css">
 
         <!-- Personal JS file -->
-        <script src="../static/scripts/home.js"></script>
+        <script src="../static/scripts/nav.js"></script>
+        <script src="../static/scripts/game.js"></script>
 
         <!-- Bootstrap Responsive Viewing required meta tag -->
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -50,7 +51,7 @@
             <!-- Menu dropdown it only shows when the menu button clicked -->
             <ul id="myMenuDown" class="down_menu">
                 <li>
-                    <a class="down_item" href="#">
+                    <a class="down_item" onclick="popupFunction()">
                         <svg class="nav_icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                             <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
@@ -89,7 +90,43 @@
             </div>
         </nav>
         <!-- Navigation bar section end ****************************************** -->
-
+        
+        <!-- Popup(How to play) section ****************************************** -->
+        <div class="popup_howtoplay" id="myPopup">
+            <div class="box_howtoplay col-9 vertical-center">
+                <h3>How to play</h3>
+                <!-- The button to close popup -->
+                <button class="close_btn btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+                        <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+                    </svg>
+                </button>
+                <h5>Summary</h5>
+                <p>
+                    Shark Atteck rules are very simple. The board is divided into cells, with sharks randomly distributed. 
+                    To win, you need to open all the cells. The number on a cell shows the number of sharks adjacent to it. 
+                    Using this information, you can determine cells that are safe, and cells that contain sharks. 
+                    Cells suspected of being mines can be marked with a flag using the right mouse button.
+                </p>
+                <hr>
+                <h5>Sharks</h5>
+                <p>Scary sharks are in this area, you need to spot sharks to keep the beach safe!</p>
+                <h5>Numbers</h5>
+                <p>The numbers indicates the number of sharks you to find them</p>
+                <h5>Flags</h5>
+                <p>Using the flags will help you to keep track of where you think the sharks are</p>
+                <h5>Winning</h5>
+                <p>
+                    You've won the game when you've opened all squares that don't contain a shark. 
+                    If you've opened all the empty/nr squares but haven't flagged the mine squares remaining, 
+                    they will be auto-flagged and you have won. So, essentially flagging is not required, 
+                    it's only there to help you keep track of where you think the mines are. 
+                    The real way to win is open all the non-shark squares.
+                </p>
+            </div>
+        </div>
+        <!-- Popup(How to play) section end ****************************************** -->
 
 
         <!-- Container for the whole page (except for the navBar) -->
@@ -135,7 +172,7 @@
                         </div>
 
                         <!-- Game Board -->
-                        <div class="square d-flex justify-content-center panel hardBorder col-10 offset-1" id="gameBoard">
+                        <div class="square no-padding d-flex justify-content-center panel hardBorder col-10 offset-1" id="gameBoard">
                             <!-- Board Grid Table 10x10 -->
                             <table class="vertical-center" id="boardTable">
                             </table>
