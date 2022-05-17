@@ -7,11 +7,11 @@
 
         <!-- Linking any relevant libraries/CDN used. -->
 
-        <!-- <style>
-            div {
+        <style>
+            button {
                 border: 1px solid green;
             }
-        </style> -->
+        </style>
 
         <!-- Bootstrap CDN -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" 
@@ -141,7 +141,7 @@
                         so that it can then be vertically aligned as a group. This
                         method of wrapping is used as vertical alignment is achieved by using
                         an absolute position property. -->
-                    <div class="vertical-center col-12" id="gameWrapper">
+                    <div class="vertical-center col-12 top-padding" id="gameWrapper">
 
                         <!-- Game info banner -->
                         <div class="col-10 offset-1" id="gameInfoBanner">
@@ -149,15 +149,15 @@
                                 <!-- Flag Information -->
                                 <div class="d-flex justify-content-center col-4">
                                     <div class="vertical-center">
-                                        <h6 class="halign-text">Flags Used:</h6>
-                                        <h6 class="halign-text">3</h6>
+                                        <h6 class="halign-text">Flags Left:</h6>
+                                        <h6 class="halign-text" id="flagsLeft">?</h6>
                                     </div>
                                 </div>
 
                                 <!-- Timer Display -->
                                 <div class="col-4">
                                     <div class="panel d-flex justify-content-center softBorder col-8 offset-2" id="timerDisplay">
-                                        <h3 id="timerText">00:00</h3>
+                                        <h3 id="timerText"><span id="timerMins">00</span>:<span id="timerSecs">00</span></h3>
                                     </div>
                                 </div>
 
@@ -165,7 +165,7 @@
                                 <div class="d-flex justify-content-center col-4">
                                     <div class="vertical-center">
                                         <h6 class="halign-text">Sharks in the area:</h6>
-                                        <h6 class="halign-text">20</h6>
+                                        <h6 class="halign-text" id="sharkNum">?</h6>
                                     </div>
                                 </div>
                             </div>
@@ -174,8 +174,8 @@
                         <!-- Game Board -->
                         <div class="square no-padding d-flex justify-content-center panel hardBorder col-10 offset-1" id="gameBoard">
                             <!-- Board Grid Table 10x10 -->
-                            <table class="vertical-center" id="boardTable">
-                            </table>
+                            <!-- <table class="vertical-center" id="boardTable">
+                            </table> -->
                         </div>
 
                         <!-- Status Panel -->
@@ -183,7 +183,7 @@
                             <div class="softBorder panel col-10 offset-1" id="buttonPanel">
                                 <div class="row">
                                     <div class="col-10 offset-1">
-                                            <h4 class="valign-text halign-text">Status: Beach In Danger</h4>
+                                            <h4 class="valign-text halign-text" id="statusLine">Status: Beach In Danger</h4>
                                     </div>
                                 </div>
                             </div>
@@ -194,7 +194,7 @@
                             <div class="softBorder panel col-4 offset-4" id="buttonPanel">
                                 <div class="row"> 
                                     <div class="d-flex justify-content-center col-3 offset-2">
-                                        <button class="buttonBorder softBorder">Restart</button>
+                                        <button class="buttonBorder softBorder" id="restartButton">Restart</button>
                                     </div>
                                     <div class="d-flex justify-content-center col-3 offset-2">
                                         <button class="buttonBorder">Share</button>
