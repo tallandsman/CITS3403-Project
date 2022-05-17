@@ -44,6 +44,11 @@ vertically. */
     padding: 0!important;
 }
 
+/* adds padding to the top to avoid navbar overlaying other elements */
+.top-padding { 
+    padding-top: 100px; 
+}
+
 /* -------------------------------------------------------------------------------------- */
 
 /* GENERAL DESIGN STYLING */
@@ -105,7 +110,7 @@ size changes. */
     background-color: #9c9c9c;
 }
 
-.unidentified * {
+.unidentified *:not(.flag) {
     display: none;
 }
 
@@ -142,6 +147,7 @@ to fill the space of the div without expanding it. */
     -ms-transform: translateY(-50%);
 }
 
+/* Styles the images to fit within its parent div */
 .cell-img {
     width: 100%;
     height: 100%;
