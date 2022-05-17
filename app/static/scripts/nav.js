@@ -15,12 +15,53 @@
 //     }
 // }
 
-function menuDown() {
-    var dropdown = document.getElementById("myMenuDown");
-    dropdown.classList.toggle("show");
+// function menuDown() {
+//     var dropdown = document.getElementById("myMenuDown");
+//     dropdown.classList.toggle("show");
+// }
+
+// function popupFunction() {
+//     var popup = document.getElementById("myPopup");
+//     popup.classList.toggle("show_popup");
+// }
+
+window.onclick = function(event) {
+    if(document.getElementById("myMenuDown").style.display == "block") {
+        console.log("display is block")
+        if(!event.target.matches(".menu_btn")) {
+            console.log("click not a menu button")
+            // if(!event.target.matches("#myMenuDown")) {
+            //     console.log("click not ul menu")
+            //     document.getElementById("myMenuDown").style.display = "none";
+            // }
+        }
+    }
 }
 
-function popupFunction() {
-    var popup = document.getElementById("myPopup");
-    popup.classList.toggle("show_popup");
+// onclick on the button to open down menu
+function menuDown() {
+    document.getElementById("myMenuDown").style.display = "block";
 }
+
+// window.onclick = function(event) {
+//     if(document.getElementById("myPopup").style.visibility == "visible") {
+//         console.log("It's visible now")
+//         if (!event.target.matches(".down_item")) {
+//             console.log("click not down-item")
+//             if (!event.target.matches(".box_howtoplay")) {
+//                 console.log("click not box howtoplay")
+//                 document.getElementById("myPopup").style.visibility = "hidden";
+//             }
+//         }
+//     }
+// }
+// onclick on How to play menu will show the pop up to change style visibility property hidden to visible 
+function popupShow() {
+    document.getElementById("myPopup").style.visibility = "visible";
+}
+// onclick on 'x' button to close pop up
+function popupClose() {
+    document.getElementById("myPopup").style.visibility = "hidden";
+}
+
+
