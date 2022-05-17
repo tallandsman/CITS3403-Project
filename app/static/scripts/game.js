@@ -97,8 +97,10 @@ Tile.prototype.addNum = function() {
     }
 }
 
-// Method that updates the css styling of the html element representing 
-// the tile based on the tiles current state.
+/**
+ * Method that updates the css styling of the html element representing 
+ * the tile based on the tiles current state.
+ */
 Tile.prototype.updateStyle = function() {
 
     // Using the logical row and column to reference the html elements representing the tile.
@@ -217,7 +219,6 @@ function tileLeftClick(event) {
  * Will change the flag property of the tile to true.
  */
 function tileRightClick(event) {
-    console.log("Right Click");
 
     let div = event.target.closest("div");
 
@@ -247,7 +248,8 @@ function tileRightClick(event) {
  * Function that triggers the game winning set of actions.
  */
 function gameWin() {
-
+    // Stop Timer
+    document.getElementById("statusLine").innerHTML = "Status: BEACH IS SAFE";
 }
 
 /**
@@ -318,35 +320,6 @@ function makeHTMLTable() {
             // Adding classes for styling purposes
             td.classList.add("boardCell");
 
-            // // Adding the flag image to each element.
-            // let flag = document.createElement("img");
-            // flag.src = "../static/images/buoy.png";
-
-            // flag.classList.add("cell-img");
-
-            // div.appendChild(flag);
-            
-            // Adding text elements to all numbered cells
-            let tile = window.board[row][col];
-            if (tile.number != 0 && !tile.shark) {
-                // let h4 = document.createElement("h4");
-                // let text = document.createTextNode(tile.number);
-
-                // h4.classList = "cellNum halign-text";
-    
-                // h4.appendChild(text);
-                // div.appendChild(h4);
-            }
-            // Adds the shark image for shark tiles.
-            else if (tile.shark) {
-                // let img = document.createElement("img");
-                // img.src = "../static/images/sharkIcon.png";
-
-                // img.classList.add("cell-img");
-
-                // div.appendChild(img);
-            }
-
             td.appendChild(div);
             tr.appendChild(td);
         }
@@ -411,6 +384,11 @@ function genShark() {
     console.log(window.sharks);
 }
 
+function startTimer() {
+    var startTime = new Date().getTime();
+    console.log(startTime);
+}
+
 /**
  * Initialising the pages default game state
  */
@@ -421,6 +399,8 @@ function init() {
     makeHTMLTable();
 
     window.revTiles = 0;
+
+    document.getElementById("sharkNum").innerHTML = NUMSHARK;
     
     // Initially sets the styling for the board.
     for (let row=0; row<ROW; row++) {
@@ -431,7 +411,6 @@ function init() {
 
     // Event listener for any mousedown event.
     $('.cellDiv').on('mousedown', function( event ) {
-        console.log(event.which)
         switch (event.which) {
             // Left mouse button
             case 1:
@@ -448,4 +427,6 @@ function init() {
     const noRightClick = document.getElementById("gameBoard");
 
     noRightClick.addEventListener("contextmenu", e => e.preventDefault());
+
+    startTimer();
 }
