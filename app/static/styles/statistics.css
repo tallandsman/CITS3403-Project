@@ -1,18 +1,9 @@
-/* The element this class is applied to will be centered
-vertically. */
-.vertical-center {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
 /* Navigation bar */
 nav {
     width: 100%;
     background-color: #fff;
     box-shadow: 0.4vw 0.4vw 0.4vw rgba(0,0,0,0.2);
-    position: fixed;
+    position: relative;
     top: 0;
     right: 0;
     left: 0;
