@@ -50,9 +50,10 @@ vertically. */
 }
 
 /* adds padding to the top to avoid navbar overlaying other elements */
-.top-padding { 
+/* .top-padding { 
     padding-top: 100px; 
-}
+} */
+/* commant this top-padding class, navbar is unfixed  */
 
 /* -------------------------------------------------------------------------------------- */
 
@@ -169,7 +170,8 @@ to fill the space of the div without expanding it. */
 
 #contentDiv {
     position: relative;
-    height: 100vh;
+    height: 90vh;
+    max-height: 90vh;
 }
 
 /* Popup How to play */
@@ -292,7 +294,7 @@ h1>a:hover {
 .sign_in_box {
     text-align: right;
 }
-.sign_in_btn {
+.sign_in_box>a {
     font-size: 1.5vw;
     border: 0.1vw solid #888;
     border-radius: 0.5vw;
@@ -300,13 +302,34 @@ h1>a:hover {
     color: #444;
     margin: 0 3vw;
 }
-.sign_in_btn:hover {
+.sign_in_box>a:hover {
     color: #fff;
     background-color: rgb(93, 171, 230);
     border-color: rgb(93, 171, 230);
     text-decoration: none;
 }
-
+/* nav sign-in buttom changed when user is signed in Class name changed from sign_in_box to sign_out_box 
+and change style display toggled block and none */
+.sign_out_box {
+    text-align: center;
+}
+.sign_out_box>p {
+    margin-bottom:0.5vh;
+}
+.sign_out_box>a {
+    font-size: 1.2vw;
+    background-color:rgb(148, 205, 248);
+    border: 0.1vw solid rgb(125, 193, 245);
+    border-radius: 0.5vw;
+    padding: 0.5vh 1.5vw;
+    color: #fff;
+}
+.sign_out_box>a:hover {
+    color: #444;
+    border-color: #888;
+    background-color:#ddd;
+    text-decoration: none;
+}
 
 
 
