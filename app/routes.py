@@ -10,7 +10,8 @@ from werkzeug.urls import url_parse
 # TODO: add comments
 @app.route('/')
 @app.route('/index')
-@login_required # TODO: Decide if we want unathenticatd (non-users) to be able to play the game -> if yes form() needs to be changed
+# TODO: Decide if we want unathenticatd (non-users) to be able to play the game -> if yes form() needs to be changed
+# @login_required
 def index():
     return render_template('home.html')
 
@@ -23,15 +24,15 @@ def sign_in():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
-            return redirect(url_for('signin'))
-        login_user(user, remember=form.remember_me.data)
+            return redirect(url_for('sign_in'))
+        login_user(user)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('index')
         return redirect(next_page)
     return render_template('signIn.html', title='Sign In', form=form)
 
-@app.route('/signup')
+@app.route('/signup', methods=['GET', 'POST'])
 def sign_up():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
@@ -50,3 +51,7 @@ def sign_up():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+@app.route('/statistics')
+def statistics():
+    return render_template('statistics.html')
