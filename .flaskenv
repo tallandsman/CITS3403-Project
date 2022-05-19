@@ -1,0 +1,2 @@
+FLASK_APP=sharkattack.py
+FLASK_ENV=development
