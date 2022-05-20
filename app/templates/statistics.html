@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <!-- Setting the page's title and icon. -->
-        <title>Shark Attack</title>
+        <title>Statistics</title>
         <link rel="icon" type="image/x-icon" href="../static/images/sharkIcon.ico">
 
         <!-- Linking any relevant libraries/CDN used. -->
@@ -27,7 +27,7 @@
         <!-- Will merge stat.css to home.css -->
 
         <!-- Personal JS file -->
-        <script src="../static/scripts/nav.js"></script>
+        <script src="../static/scripts/nav_popup.js"></script>
         <script src="../static/scripts/game.js"></script>
 
         <!-- Bootstrap Responsive Viewing required meta tag -->
@@ -49,7 +49,7 @@
             <!-- Menu dropdown it only shows when the menu button clicked -->
             <ul id="myMenuDown" class="down_menu">
                 <li>
-                    <a class="down_item" onclick="popupFunction()">
+                    <a class="down_item" onclick="popupShow()">
                         <svg class="nav_icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                             <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
@@ -58,7 +58,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="down_item" href="#">
+                    <a class="down_item" href="{{ url_for('statistics') }}">
                         <svg class="nav_icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
                             <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
                         </svg>
@@ -75,10 +75,10 @@
                 </li>
             </ul>
             <!-- h1 tag for game name -->
-            <h1 class="col-6"><a class="title" href="#">SHARK ATTACK</a></h1>
+            <h1 class="col-6"><a class="title" href="{{ url_for('index') }}">SHARK ATTACK</a></h1>
             <!-- Sign-in button -->
             <div class="sign_in_box col-3">
-                <a class="sign_in_btn" href="#">
+                <a class="sign_in_btn" href="{{ url_for('sign_in') }}">
                     <svg class="nav_icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                         <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
@@ -94,7 +94,7 @@
             <div class="box_howtoplay col-9 vertical-center">
                 <h3>How to play</h3>
                 <!-- The button to close popup -->
-                <button class="close_btn btn">
+                <button class="close_btn btn" onclick="popupClose()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
                         <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
