@@ -1,10 +1,15 @@
 /* GENERAL LAYOUT STYLING */
 
+body {
+    background-color: rgb(231,245,255);
+
+}
 
 /* Make a one page that doesn't make scroll */
 .one-page {
-    width: 100%;
-    height: 100%;
+    max-width: 100vw;
+    max-height: 100vh;
+    overflow: hidden;
 }
 
 /* The element this class is applied to will be centered
@@ -45,9 +50,10 @@ vertically. */
 }
 
 /* adds padding to the top to avoid navbar overlaying other elements */
-.top-padding { 
+/* .top-padding { 
     padding-top: 100px; 
-}
+} */
+/* commant this top-padding class, navbar is unfixed  */
 
 /* -------------------------------------------------------------------------------------- */
 
@@ -164,13 +170,15 @@ to fill the space of the div without expanding it. */
 
 #contentDiv {
     position: relative;
-    height: 100vh;
+    height: 90vh;
+    max-height: 90vh;
 }
 
 /* Popup How to play */
 .popup_howtoplay {
     width: 100%;
-    height: 100%;
+    max-height: 90vh;
+    height: 90%;
     position: absolute;
     left: 0;
     background-color: rgba(255,255,255,0.7);
@@ -178,6 +186,8 @@ to fill the space of the div without expanding it. */
     visibility: hidden;
 }
 .box_howtoplay {
+    max-width: 75%;
+    max-height: 80%;
     margin: 0 12.5%;
     padding: 2vw 3vw;
     background-color: #fff;
@@ -190,15 +200,15 @@ to fill the space of the div without expanding it. */
 }
 h3 {
     text-align: center;
-    font-size: 2.5vw;
+    font-size: 2vw;
 }
 h5 {
-    margin: 1vw 0;
-    font-size: 1.8vw;
+    margin: 0.8vw 0;
+    font-size: 1.3vw;
 }
 .box_howtoplay>p {
     text-align: justify;
-    font-size: 1.3vw;
+    font-size: 1.1vw;
 }
 hr {
     border: 0.01vw solid #888;
@@ -212,6 +222,7 @@ hr {
 /* Navigation bar */
 nav {
     width: 100%;
+    height: 8vh;
     background-color: #fff;
     box-shadow: 0.4vw 0.4vw 0.4vw rgba(0,0,0,0.2);
     position: relative;
@@ -227,7 +238,7 @@ nav {
     background-color: #fff;
     border: 0.1vw solid #888;
     border-radius: 0.5vw;
-    padding: 0.6vw 0.8vw;
+    padding: 0.8vh 0.8vw;
     color: #888;
     margin: 0 3vw;
 }
@@ -283,18 +294,40 @@ h1>a:hover {
 .sign_in_box {
     text-align: right;
 }
-.sign_in_btn {
+.sign_in_box>a {
     font-size: 1.5vw;
     border: 0.1vw solid #888;
     border-radius: 0.5vw;
-    padding: 0.8vw 2vw;
+    padding: 0.8vh 2vw;
     color: #444;
     margin: 0 3vw;
 }
-.sign_in_btn:hover {
+.sign_in_box>a:hover {
     color: #fff;
     background-color: rgb(93, 171, 230);
     border-color: rgb(93, 171, 230);
+    text-decoration: none;
+}
+/* nav sign-in buttom changed when user is signed in Class name changed from sign_in_box to sign_out_box 
+and change style display toggled block and none */
+.sign_out_box {
+    text-align: center;
+}
+.sign_out_box>p {
+    margin-bottom:0.5vh;
+}
+.sign_out_box>a {
+    font-size: 1.2vw;
+    background-color:rgb(148, 205, 248);
+    border: 0.1vw solid rgb(125, 193, 245);
+    border-radius: 0.5vw;
+    padding: 0.5vh 1.5vw;
+    color: #fff;
+}
+.sign_out_box>a:hover {
+    color: #444;
+    border-color: #888;
+    background-color:#ddd;
     text-decoration: none;
 }
 
