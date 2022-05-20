@@ -426,6 +426,19 @@ function addShark(pos) {
 }
 
 /**
+ * Function that uses jQuery and AJAX requests to retrieve the puzzle for the day.
+ */
+function getPuzzle() {
+	$.get ({
+		url: "/index.py",
+		success: function(data) {
+			console.log(data);
+		},
+		dataType: "json" 
+	});
+}
+
+/**
  * Function that will generate a set of 'sharks' and then 
  * updates the relevant Tile object information.
  */
