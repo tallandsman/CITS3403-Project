@@ -264,11 +264,11 @@ function sendStats(DBurl, compTime, gameOutcome) {
 
 	// Parameters/values to be passed to the backend are stored in a string,
 	// This allows for them to be sent in the .send() method.
-	var params = [
-		{"date": gameDate},
-		{"time": compTime},
-		{"gameOutcome": gameOutcome},
-	];
+	var params = {
+		"date": gameDate,
+		"time": compTime,
+		"gameOutcome": gameOutcome
+	};
 
 	$.ajax({
 		type: "POST",
@@ -277,23 +277,6 @@ function sendStats(DBurl, compTime, gameOutcome) {
 		contentType: "application/json",
 		dataType: "json"
 	})
-	// var xhttp = new XMLHttpRequest();
-	// xhttp.onreadystatechange = function () {
-
-	// 	// On a successful POST request in which the acknowledgement is received.
-	// 	if (xhttp.readyState == 4 && xhttp.status == 200) {
-	// 		console.log("a-ok");
-	// 	}
-
-	// 	// On error.
-	// 	else {
-	// 		console.log("readyState: " + xhttp.readyState);
-	// 		console.log("status: " + xhttp.status);
-	// 	}
-	// }
-	// xhttp.open("POST", DBurl, true);
-	// xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	// xhttp.send(params);
 }
 
 /**
@@ -306,7 +289,7 @@ function gameWin() {
     // Stop Timer
 	let time = stopTimer();
 
-	sendStats("/gamestats/<:id>", time[0]*60 + time[1], true);
+	sendStats("/gamestats", time[0]*60 + time[1], true);
 }
 
 /**
@@ -317,7 +300,7 @@ function gameOver() {
     revealBoard();
 	let time = stopTimer();
 
-	sendStats("/gamestats/<:id>", time[0]*60 + time[1], false);
+	sendStats("/gamestats", time[0]*60 + time[1], false);
 }
 
 /**
@@ -430,35 +413,27 @@ function addShark(pos) {
  */
 function getPuzzle() {
 	$.get ({
-		url: "/index.py",
+		url: "/puzzle",
 		success: function(data) {
-			console.log(data);
+			// Creates a global variable to store the sharks.
+			window.sharks = data;
 		},
 		dataType: "json" 
 	});
 }
 
 /**
- * Function that will generate a set of 'sharks' and then 
- * updates the relevant Tile object information.
+ * Function that updates the relevant Tile object information.
  */
 function genShark() {
+	
+	// Retrieve the shark positions from the flask database.
+    getPuzzle();
 
-    // A constant variable that represents the number of tiles on the game board.
-    const MAXTILES = ROW * COL;
-
-    // Uses an array of integers ranging from 0 to 1 less than the maximum 
-    // number of tiles to represent the sharks and their position in the board.
-    window.sharks = new Array(NUMSHARK);
-    for (let shark=0; shark<NUMSHARK; shark++) {
-        do {
-            // Position of sharks are randomly generated and duplicate 
-            // positions are not used to ensure correct number of sharks.
-            position = Math.floor(Math.random() * MAXTILES);
-        } while (window.sharks.includes(position));
-        window.sharks[shark] = position;
-        addShark(position);
-    }
+	for (let shark=0; shark<NUMSHARK; shark++) {
+		// Add the sharks to the game board
+		addShark(window.sharks[shark]);
+	}
 }
 
 /**
@@ -582,4 +557,6 @@ function init() {
 	$("#startButton").on("click", gameStart);
 
 	$("#restartButton").on("click", restartGame);
+
+	getPuzzle();
 }
