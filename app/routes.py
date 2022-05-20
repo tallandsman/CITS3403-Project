@@ -1,5 +1,6 @@
 from flask import render_template, redirect, flash, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
+from app.models import Game_Statistics # move to api section
 
 from app import app, db
 from app.forms import SignInForm, SignUpForm
@@ -46,7 +47,7 @@ def sign_up():
         return redirect(url_for('index'))
     return render_template('signUp.html', title='Sign Up', form=form)
 
-# TODO: add logout to nav bar or somewhere else in the application
+# TODO: add logout to nav bar
 @app.route('/logout')
 def logout():
     logout_user()
@@ -55,3 +56,15 @@ def logout():
 @app.route('/statistics')
 def statistics():
     return render_template('statistics.html')
+
+# send game stats to db -> to be moved to api section later (?)
+# /<id>
+@app.route('/gamestats', methods=['POST'])
+def game_stats():
+    data = request.get_json() or {}
+    #Game_Statistics.user_id = user_id 
+    Game_Statistics.date = data.args.get('date')
+    Game_Statistics.completion_time = data.args.get('completion_time')
+    Game_Statistics.win  = data.args.get('win')
+    db.session.commit()
+    return #JSON RESPONSE 

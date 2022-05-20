@@ -27,8 +27,8 @@ class User(UserMixin, db.Model):
 class Game_Statistics(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    date = db.Column(db.DateTime, default=datetime.date)
-    completion_time = db.Column(db.DateTime, nullable=False)
+    date = db.Column(db.DateTime, default=datetime.today)
+    completion_time = db.Column(db.Float, nullable=False)
     win = db.Column(db.Boolean, nullable=False)
 
     def __repr__(self):
@@ -42,7 +42,6 @@ class Puzzle(db.Model):
     def __repr__(self):
         return # to be completed #
 
-# to delete after testing (?)
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
