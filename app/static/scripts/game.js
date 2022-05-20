@@ -412,27 +412,27 @@ function addShark(pos) {
  * Function that uses jQuery and AJAX requests to retrieve the puzzle for the day.
  */
 function getPuzzle() {
+
 	$.get ({
 		url: "/puzzle",
 		success: function(data) {
-			// Creates a global variable to store the sharks.
-			window.sharks = data;
+            let sharkArray = data.split(",");
+            genShark(sharkArray);
 		},
 		dataType: "json" 
 	});
+
 }
 
 /**
  * Function that updates the relevant Tile object information.
  */
-function genShark() {
+function genShark(sharkArray) {
 	
 	// Retrieve the shark positions from the flask database.
-    getPuzzle();
-
 	for (let shark=0; shark<NUMSHARK; shark++) {
 		// Add the sharks to the game board
-		addShark(window.sharks[shark]);
+		addShark(Number(sharkArray[shark]));
 	}
 }
 
@@ -475,7 +475,7 @@ function stopTimer() {
 function gameStart() {
 
     window.board = makeBoard();
-    genShark();
+    getPuzzle();
     makeHTMLTable();
 
     window.revTiles = 0;
@@ -521,12 +521,12 @@ function gameStart() {
  * the game can be restarted.
  */
 function restartGame() {
+    stopTimer();
 	document.getElementById("timerMins").innerHTML = "00";
 	document.getElementById("timerSecs").innerHTML = "00";
 	document.getElementById("flagsLeft").innerHTML = "";
 	document.getElementById("sharkNum").innerHTML = "";
-	stopTimer();
-
+	
 	// Calls init() to reset the game state.
 	init();
 }
@@ -557,6 +557,4 @@ function init() {
 	$("#startButton").on("click", gameStart);
 
 	$("#restartButton").on("click", restartGame);
-
-	getPuzzle();
 }
