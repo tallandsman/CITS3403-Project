@@ -1,10 +1,13 @@
-from flask import render_template, redirect, flash, url_for, request
+from flask import render_template, redirect, flash, url_for, request, jsonify
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import Game_Statistics # move to api section
+from datetime import datetime
 
 from app import app, db
 from app.forms import SignInForm, SignUpForm
-from app.models import User
+from app.models import User, Game_Statistics, Puzzle
+
+import random
+import json
 
 from werkzeug.urls import url_parse
 
@@ -62,9 +65,53 @@ def statistics():
 @app.route('/gamestats', methods=['POST'])
 def game_stats():
     data = request.get_json() or {}
-    #Game_Statistics.user_id = user_id 
-    Game_Statistics.date = data.args.get('date')
-    Game_Statistics.completion_time = data.args.get('completion_time')
-    Game_Statistics.win  = data.args.get('win')
+    #print("game data:", data)
+    game_stats = Game_Statistics() 
+    game_stats.user_id = current_user.get_id()
+    game_stats.date = datetime.strptime((data['date']),'%Y-%m-%dT%H:%M:%S.000Z').date()
+    game_stats.completion_time = data['time']
+    game_stats.win = data['gameOutcome']
+    db.session.add(game_stats)
     db.session.commit()
-    return #JSON RESPONSE 
+    #response = jsonify(game_stats)
+    #response.status_code = 201 #creating a new resource should chare the location.... - delete after
+    return # to be completed 
+
+@app.route('/puzzle', methods=['GET'])
+def get_puzzle():
+    puzzles = Puzzle.query.all()
+
+    for puzzle in puzzles:
+        if puzzle.date == datetime.today().strftime('%Y-%m-%d'):
+            return json.dumps(puzzle.sharks_locations)
+        
+    todays_puzzle = generate_puzzle()
+    db.session.add(todays_puzzle)
+    db.session.commit()
+
+    return json.dumps(todays_puzzle.sharks_locations)
+
+def generate_puzzle():
+    numTiles = 100
+    numShark = 10
+
+    sharks = []
+    sharks_string = ""
+    count = 0
+
+    while (count < numShark):
+        position = random.randint(0, numTiles - 1)
+        if (position not in sharks):
+            sharks.append(position)
+            count = count + 1
+
+    for shark in sharks:
+        sharks_string += str(shark) + ","
+    
+    sharks_string = sharks_string.strip(",")
+    
+    puzzle = Puzzle()
+    puzzle.sharks_locations = sharks_string
+    puzzle.date = datetime.today().strftime('%Y-%m-%d')
+
+    return puzzle

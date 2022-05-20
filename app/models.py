@@ -34,10 +34,12 @@ class Game_Statistics(db.Model):
     def __repr__(self):
         return '<Game id {}>'.format(self.id)
 
-# able to store previous sharkattack games
+# table to store sharks location for each daily puzzle
 class Puzzle(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    # to be completed #
+    date = db.Column(db.String(120), nullable=False)
+    sharks_locations = db.Column(db.String, nullable=False)
+    # to be completed & UPDATED #
 
     def __repr__(self):
         return # to be completed #
