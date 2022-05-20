@@ -25,5 +25,20 @@ tbody>tr:hover {
     color: #444;
 }
 
+/* tab */
+.tab {
+    overflow: hidden;
+    float: right;
+}
+.tab button:hover {
+    color: #888;
+}
+.tab button.active {
+    color: rgb(90, 179, 247);
+    font-weight: bold;
+}
+.tabcontent {
+    display: none;
+}
 
 

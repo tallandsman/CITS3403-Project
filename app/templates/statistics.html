@@ -28,6 +28,7 @@
 
     <!-- Personal JS file -->
     <script src="../static/scripts/nav_popup.js"></script>
+    <script src="../static/scripts/statistics.js"></script>
 
     <!-- Bootstrap Responsive Viewing required meta tag -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -130,104 +131,308 @@
             <p>Filters:</p>
             <button class="who btn dropdown-toggle">Who?</button>
             <button class="order btn">Order</button>
+            <div class="tab">
+                <button class="tablinks btn active" onclick="openStat(event, 'personal')">Personal</button>
+                <button class="tablinks btn" onclick="openStat(event, 'friands')">Friands</button>
+                <button class="tablinks btn" onclick="openStat(event, 'global')">Global</button>
+            </div>
         </div>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Rank</th>
-                    <th>Name</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Win?</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>3</td>
-                    <td>Ali</td>
-                    <td>06/05/2022</td>
-                    <td>3:00 mins</td>
-                    <th>Yes</th>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Ali</td>
-                    <td>06/05/2022</td>
-                    <td>3:00 mins</td>
-                    <th>Yes</th>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Ali</td>
-                    <td>06/05/2022</td>
-                    <td>3:00 mins</td>
-                    <th>Yes</th>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Ali</td>
-                    <td>06/05/2022</td>
-                    <td>3:00 mins</td>
-                    <th>Yes</th>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Ali</td>
-                    <td>06/05/2022</td>
-                    <td>3:00 mins</td>
-                    <th>Yes</th>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Ali</td>
-                    <td>06/05/2022</td>
-                    <td>3:00 mins</td>
-                    <th>Yes</th>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Ali</td>
-                    <td>06/05/2022</td>
-                    <td>3:00 mins</td>
-                    <th>Yes</th>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Ali</td>
-                    <td>06/05/2022</td>
-                    <td>3:00 mins</td>
-                    <th>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
-                            <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                        </svg>
-                    </th>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Ali</td>
-                    <td>06/05/2022</td>
-                    <td>3:00 mins</td>
-                    <th>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
-                            <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                        </svg>
-                    </th>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Ali</td>
-                    <td>06/05/2022</td>
-                    <td>3:00 mins</td>
-                    <th>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
-                            <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
-                        </svg>
+        <div id="personal" class="tabcontent" style="display: block;">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Win?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>3</td>
+                        <td>Ali</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>Yes</th>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ali</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>Yes</th>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ali</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>Yes</th>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ali</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>Yes</th>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ali</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>Yes</th>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ali</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>Yes</th>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ali</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>Yes</th>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ali</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                            </svg>
                         </th>
-                </tr>
-            </tbody>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ali</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                            </svg>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ali</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+                                <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+                            </svg>
+                            </th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="friands" class="tabcontent">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Win?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>3</td>
+                        <td>Friands</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>Yes</th>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ali</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>Yes</th>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ali</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>Yes</th>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ali</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>Yes</th>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ali</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>Yes</th>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ali</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>Yes</th>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ali</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>Yes</th>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ali</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                            </svg>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ali</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                            </svg>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ali</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+                                <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+                            </svg>
+                            </th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="global" class="tabcontent">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Win?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>3</td>
+                        <td>Global</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>Yes</th>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ali</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>Yes</th>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ali</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>Yes</th>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ali</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>Yes</th>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ali</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>Yes</th>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ali</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>Yes</th>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ali</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>Yes</th>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ali</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                            </svg>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ali</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                            </svg>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ali</td>
+                        <td>06/05/2022</td>
+                        <td>3:00 mins</td>
+                        <th>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+                                <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+                            </svg>
+                            </th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-        </table>
+
     </div>
     
     
