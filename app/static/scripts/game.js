@@ -152,7 +152,6 @@ Tile.prototype.reveal = function() {
 
     window.revTiles++;
     if (window.revTiles == (ROW*COL - NUMSHARK)) {
-        console.log("YAY WIN");
         gameWin();
     }
 
@@ -207,15 +206,12 @@ function tileLeftClick(event) {
     // Action changes depending on the tile clicked.
     if (!tile.mystery) {
         // ALREADY CLICKED
-        console.log("Already clicked");
     }
     else if (tile.flag) {
         // FLAGGED
-        console.log("Flagged");
     }
     else if (tile.shark) {
         // GAME OVER
-        console.log("Game over");
         gameOver();
     }
     else {
@@ -257,13 +253,60 @@ function tileRightClick(event) {
 }
 
 /**
+ * Function that sends the result stats of a game to the flask backend
+ * via a POST request and the use of an XMLHttpRequest.
+ */
+function sendStats(DBurl, compTime, gameOutcome) {
+
+	// Creates a datetime object to represent the date of the puzzle played.
+	// This object is rounded to the day as puzzles are created daily.
+	let gameDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+
+	// Parameters/values to be passed to the backend are stored in a string,
+	// This allows for them to be sent in the .send() method.
+	var params = [
+		{"date": gameDate},
+		{"time": compTime},
+		{"gameOutcome": gameOutcome},
+	];
+
+	$.ajax({
+		type: "POST",
+		url: DBurl,
+		data: JSON.stringify(params),
+		contentType: "application/json",
+		dataType: "json"
+	})
+	// var xhttp = new XMLHttpRequest();
+	// xhttp.onreadystatechange = function () {
+
+	// 	// On a successful POST request in which the acknowledgement is received.
+	// 	if (xhttp.readyState == 4 && xhttp.status == 200) {
+	// 		console.log("a-ok");
+	// 	}
+
+	// 	// On error.
+	// 	else {
+	// 		console.log("readyState: " + xhttp.readyState);
+	// 		console.log("status: " + xhttp.status);
+	// 	}
+	// }
+	// xhttp.open("POST", DBurl, true);
+	// xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	// xhttp.send(params);
+}
+
+/**
  * Function that triggers the game winning set of actions.
  */
 function gameWin() {
-    // Stop Timer
-    document.getElementById("statusLine").innerHTML = "Status: BEACH IS SAFE";
 
-	stopTimer();
+	document.getElementById("statusLine").innerHTML = "Status: BEACH IS SAFE";
+
+    // Stop Timer
+	let time = stopTimer();
+
+	sendStats("/gamestats/<:id>", time[0]*60 + time[1], true);
 }
 
 /**
@@ -272,7 +315,9 @@ function gameWin() {
  */
 function gameOver() {
     revealBoard();
-	stopTimer();
+	let time = stopTimer();
+
+	sendStats("/gamestats/<:id>", time[0]*60 + time[1], false);
 }
 
 /**
@@ -401,13 +446,21 @@ function genShark() {
         window.sharks[shark] = position;
         addShark(position);
     }
-    console.log(window.sharks);
 }
 
+/**
+ * Function that creates a datetime object to mark the start
+ * time of the game.
+ */
 function startTimer() {
     window.startTime = new Date().getTime();
 }
 
+/**
+ * Function that creates a new datetime object and uses it to calculate
+ * how long the current game has been running for. The function then 
+ * calculates the seconds and minutes and updates the HTML timer accordingly.
+ */
 function updateTimer() {
 	var stopTime = new Date().getTime();
 	var timeDiff = stopTime - window.startTime;
@@ -415,10 +468,17 @@ function updateTimer() {
 	var seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
 	document.getElementById("timerMins").innerHTML = minutes.toLocaleString('en-US', {minimumIntegerDigits: 2});
 	document.getElementById("timerSecs").innerHTML = seconds.toLocaleString('en-US', {minimumIntegerDigits: 2});
+	return [minutes, seconds];
 }
 
+/**
+ * Function that will clear the set interval such that the
+ * timer stops ticking up.
+ */
 function stopTimer() {
+	let finishTime = updateTimer();
 	clearInterval(window.myInterval);
+	return finishTime;
 }
 
 /**
@@ -457,22 +517,36 @@ function gameStart() {
         }
     });
 
+	// Disabling the context menu that usually appears on right click,
+	// whilst the user's cursor is hovering over the game board section.
     const noRightClick = document.getElementById("gameBoard");
 	noRightClick.addEventListener("contextmenu", e => e.preventDefault());
 
+	// Starts the game timer and the HTML elements are set to update 
+	// at a 1 second interval.
     startTimer();
 	window.myInterval = setInterval(updateTimer, 1000);
 }
 
+/**
+ * Function that restarts and resets the timer and gameboard so that
+ * the game can be restarted.
+ */
 function restartGame() {
 	document.getElementById("timerMins").innerHTML = "00";
 	document.getElementById("timerSecs").innerHTML = "00";
-	document.getElementById("flagsLeft").innerHTML = "?";
-	document.getElementById("sharkNum").innerHTML = "?";
+	document.getElementById("flagsLeft").innerHTML = "";
+	document.getElementById("sharkNum").innerHTML = "";
 	stopTimer();
+
+	// Calls init() to reset the game state.
 	init();
 }
 
+/**
+ * Function that creates the start button upon page load,
+ * and also creates event listeners for page buttons.
+ */
 function init() {
 
 	document.getElementById("gameBoard").innerHTML = "";
@@ -490,6 +564,8 @@ function init() {
 	startButton.appendChild(textNode);
 	startDiv.appendChild(startButton);
 	document.getElementById("gameBoard").appendChild(startDiv);
+
+	// Event listeners for clicking the start or restart buttons.
 	$("#startButton").on("click", gameStart);
 
 	$("#restartButton").on("click", restartGame);
