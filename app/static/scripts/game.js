@@ -264,25 +264,36 @@ function sendStats(DBurl, compTime, gameOutcome) {
 
 	// Parameters/values to be passed to the backend are stored in a string,
 	// This allows for them to be sent in the .send() method.
-	var params = 'date=' + gameDate + '&time=' + compTime + '&gameOutcome' + gameOutcome;
+	var params = [
+		{"date": gameDate},
+		{"time": compTime},
+		{"gameOutcome": gameOutcome},
+	];
 
-	var xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function () {
+	$.ajax({
+		type: "POST",
+		url: DBurl,
+		data: JSON.stringify(params),
+		contentType: "application/json",
+		dataType: "json"
+	})
+	// var xhttp = new XMLHttpRequest();
+	// xhttp.onreadystatechange = function () {
 
-		// On a successful POST request in which the acknowledgement is received.
-		if (xhttp.readyState == 4 && xhttp.status == 200) {
-			console.log("a-ok");
-		}
+	// 	// On a successful POST request in which the acknowledgement is received.
+	// 	if (xhttp.readyState == 4 && xhttp.status == 200) {
+	// 		console.log("a-ok");
+	// 	}
 
-		// On error.
-		else {
-			console.log("readyState: " + xhttp.readyState);
-			console.log("status: " + xhttp.status);
-		}
-	}
-	xhttp.open("POST", DBurl, true);
-	xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	xhttp.send(params);
+	// 	// On error.
+	// 	else {
+	// 		console.log("readyState: " + xhttp.readyState);
+	// 		console.log("status: " + xhttp.status);
+	// 	}
+	// }
+	// xhttp.open("POST", DBurl, true);
+	// xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	// xhttp.send(params);
 }
 
 /**
