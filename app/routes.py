@@ -65,9 +65,9 @@ def statistics():
 #TODO: to be moved into contollers 
 # returns all games statistics
 def get_all_game_stats():
-    rank = 0
-    # order by top games scores
-    games = Game_Statistics.query.order_by(Game_Statistics.completion_time.asc()).all()
+    rank = 1
+    # Orders games by games won and their respective time
+    games = Game_Statistics.query.order_by(Game_Statistics.win.desc(), Game_Statistics.completion_time.asc()).all()
     global_games = []
     
     if games is not None: 
@@ -84,8 +84,8 @@ def get_all_game_stats():
 #TODO: to be moved into contollers 
 # returns all games statistics for the currently signed in user
 def get_individual_game_stats(id):
-    rank = 0
-    games = Game_Statistics.query.order_by(Game_Statistics.completion_time.asc()).filter_by(user_id=id).all()
+    rank = 1
+    games = Game_Statistics.query.order_by(Game_Statistics.win.desc(), Game_Statistics.completion_time.asc()).filter_by(user_id=id).all()
     individual_games = []
     
     if games is not None: 
