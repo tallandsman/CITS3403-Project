@@ -284,7 +284,7 @@ function sendStats(DBurl, compTime, gameOutcome) {
  */
 function gameWin() {
 
-	document.getElementById("statusLine").innerHTML = "Status: BEACH IS SAFE";
+	document.getElementById("statusLine").innerHTML = "The beach is safe!";
 
     // Stop Timer
 	let time = stopTimer();
@@ -347,10 +347,14 @@ function makeBoard() {
 function makeHTMLTable() {
 
 	document.getElementById("gameBoard").innerHTML = "";
+	let div = document.createElement("div");
+	div.classList.add("vertical-center");
+	div.classList.add("horizontal-center")
+	div.id = "boardDiv";
 	let table = document.createElement("table");
 	table.id = "boardTable";
-	table.classList.add("vertical-center");
-    document.getElementById("gameBoard").appendChild(table);
+	div.appendChild(table);
+    document.getElementById("gameBoard").appendChild(div);
 
     // Creating ROW amount of 'tr' elements
     for (let row=0; row<ROW; row++) {
@@ -474,46 +478,55 @@ function stopTimer() {
  */
 function gameStart() {
 
-    window.board = makeBoard();
-    getPuzzle();
-    makeHTMLTable();
+	if (!window.inProgress) {
+		window.board = makeBoard();
+		getPuzzle();
+		makeHTMLTable();
 
-    window.revTiles = 0;
-	window.flagsLeft = NUMSHARK;
+		window.revTiles = 0;
+		window.flagsLeft = NUMSHARK;
 
-    document.getElementById("sharkNum").innerHTML = NUMSHARK;
-    
-    // Initially sets the styling for the board.
-    for (let row=0; row<ROW; row++) {
-        for (let col=0; col<COL; col++) {
-            window.board[row][col].updateStyle();
-        }
-    }
+		document.getElementById("sharkNum").innerHTML = NUMSHARK;
+		
+		// Initially sets the styling for the board.
+		for (let row=0; row<ROW; row++) {
+			for (let col=0; col<COL; col++) {
+				window.board[row][col].updateStyle();
+			}
+		}
 
-    // Event listener for any mousedown event.
-    $('.cellDiv').on('mousedown', function( event ) {
-        switch (event.which) {
-            // Left mouse button
-            case 1:
-                tileLeftClick(event);
-                break;
-            // Right mouse button
-            case 3:
-                tileRightClick(event);
-                break;
-            default:
-        }
-    });
+		// Event listener for any mousedown event.
+		$('.cellDiv').on('mousedown', function( event ) {
+			switch (event.which) {
+				// Left mouse button
+				case 1:
+					tileLeftClick(event);
+					break;
+				// Right mouse button
+				case 3:
+					tileRightClick(event);
+					break;
+				default:
+			}
+		});
 
-	// Disabling the context menu that usually appears on right click,
-	// whilst the user's cursor is hovering over the game board section.
-    const noRightClick = document.getElementById("gameBoard");
-	noRightClick.addEventListener("contextmenu", e => e.preventDefault());
+		// Disabling the context menu that usually appears on right click,
+		// whilst the user's cursor is hovering over the game board section.
+		const noRightClick = document.getElementById("gameBoard");
+		noRightClick.addEventListener("contextmenu", e => e.preventDefault());
 
-	// Starts the game timer and the HTML elements are set to update 
-	// at a 1 second interval.
-    startTimer();
-	window.myInterval = setInterval(updateTimer, 1000);
+		document.getElementById("statusLine").innerHTML = "The beach is in danger!";
+
+		document.getElementById("startButton").classList.remove("no-game");
+		document.getElementById("startButton").classList.add("game");
+
+		window.inProgress = true;
+
+		// Starts the game timer and the HTML elements are set to update 
+		// at a 1 second interval.
+		startTimer();
+		window.myInterval = setInterval(updateTimer, 1000);
+	}
 }
 
 /**
@@ -537,21 +550,25 @@ function restartGame() {
  */
 function init() {
 
+	window.inProgress = false;
 	document.getElementById("gameBoard").innerHTML = "";
-	let startDiv = document.createElement("div");
-	let startButton = document.createElement("button");
-	let textNode = document.createTextNode("Start");
+	// let panel = document.getElementById("buttonPanel")
+	// let startDiv = document.createElement("div");
+	// let startButton = document.createElement("button");
+	// let textNode = document.createTextNode("START");
 
-	startDiv.classList.add("vertical-center");
+	// startDiv.id = "startDiv";
 
-	startButton.classList.add("softBorder");
-	startButton.classList.add("btn");
-	startButton.classList.add("btn-success");
-	startButton.id = "startButton";
+	// startButton.classList.add("softBorder");
+	// startButton.classList.add("btn");
+	// startButton.classList.add("btn-success");
+	// startButton.classList.add("vertical-center");
+	// startButton.classList.add("horizontal-center");
+	// startButton.id = "startButton";
 
-	startButton.appendChild(textNode);
-	startDiv.appendChild(startButton);
-	document.getElementById("gameBoard").appendChild(startDiv);
+	// startButton.appendChild(textNode);
+	// startDiv.appendChild(startButton);
+	// document.getElementById("gameBoard").appendChild(startDiv);
 
 	// Event listeners for clicking the start or restart buttons.
 	$("#startButton").on("click", gameStart);
