@@ -11,16 +11,14 @@ import json
 
 from werkzeug.urls import url_parse
 
-# TODO: add comments
 @app.route('/')
 @app.route('/index')
-# TODO: Decide if we want unathenticatd (non-users) to be able to play the game -> if yes form() needs to be changed
-# @login_required
 def index():
     return render_template('home.html')
 
 @app.route('/signin', methods=['GET', 'POST'])
 def sign_in():
+    # if user is already signed in - redirect it to game page
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = SignInForm()
@@ -33,11 +31,13 @@ def sign_in():
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('index')
+        # Redirect users who have signed in to game page
         return redirect(next_page)
     return render_template('signIn.html', title='Sign In', form=form)
 
 @app.route('/signup', methods=['GET', 'POST'])
 def sign_up():
+    # if user is already signed in - redirect it to game page
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = SignUpForm()
@@ -47,10 +47,10 @@ def sign_up():
         db.session.add(user)
         db.session.commit()
         flash('Congratulations, you are now a registered user!')
+        # Redirect users who have signed up to game page
         return redirect(url_for('index'))
     return render_template('signUp.html', title='Sign Up', form=form)
 
-# TODO: add logout to nav bar
 @app.route('/logout')
 def logout():
     logout_user()
@@ -58,14 +58,52 @@ def logout():
 
 @app.route('/statistics')
 def statistics():
-    return render_template('statistics.html')
+    games = get_all_game_stats()
+    individal_games = get_individual_game_stats(current_user.get_id())
+    return render_template('statistics.html', games=games, individal_games=individal_games)
 
-# send game stats to db -> to be moved to api section later (?)
-# /<id>
+#TODO: to be moved into contollers 
+# returns all games statistics
+def get_all_game_stats():
+    rank = 0
+    # order by top games scores
+    games = Game_Statistics.query.order_by(Game_Statistics.completion_time.asc()).all()
+    global_games = []
+    
+    if games is not None: 
+        for g in games:
+            if g.user_id is not None:
+                username = User.query.filter_by(id = g.user_id).first().username
+                date = g.date.strftime("%d/%m/%Y")
+                global_games.append({'Rank': rank, 'Username': username, 'Date': date,
+                                    'Time': g.completion_time, 'Win' : g.win })
+                rank += 1
+    
+    return global_games
+
+#TODO: to be moved into contollers 
+# returns all games statistics for the currently signed in user
+def get_individual_game_stats(id):
+    rank = 0
+    games = Game_Statistics.query.order_by(Game_Statistics.completion_time.asc()).filter_by(user_id=id).all()
+    individual_games = []
+    
+    if games is not None: 
+        for g in games:
+            if g.user_id is not None:
+                username = User.query.filter_by(id = id).first().username
+                date = g.date.strftime("%d/%m/%Y")
+                individual_games.append({'Rank': rank, 'Username': username, 'Date': date,
+                                        'Time': g.completion_time, 'Win' : g.win })
+                rank += 1
+   
+    return individual_games
+
+#TODO: to be moved API (?) 
+# Gets game statistics when the game is finished and stores them in the 'Game_Statistics' database
 @app.route('/gamestats', methods=['POST'])
 def game_stats():
     data = request.get_json() or {}
-    #print("game data:", data)
     game_stats = Game_Statistics() 
     game_stats.user_id = current_user.get_id()
     game_stats.date = datetime.strptime((data['date']),'%Y-%m-%dT%H:%M:%S.000Z').date()
@@ -73,10 +111,10 @@ def game_stats():
     game_stats.win = data['gameOutcome']
     db.session.add(game_stats)
     db.session.commit()
-    #response = jsonify(game_stats)
-    #response.status_code = 201 #creating a new resource should chare the location.... - delete after
-    return # to be completed 
+    return data, 201  #Returns the game outcome data and 201 - resource created 
 
+#TODO: to be moved API (?) 
+# Gets todays puzzle sharks location from the 'Puzzle' database
 @app.route('/puzzle', methods=['GET'])
 def get_puzzle():
     puzzles = Puzzle.query.all()
@@ -85,12 +123,16 @@ def get_puzzle():
         if puzzle.date == datetime.today().strftime('%Y-%m-%d'):
             return json.dumps(puzzle.sharks_locations)
         
+    # If todays date isn't in the database (locations hasn't been generated yet)
+    # genertas today's puzzle shark location and store it in the 'Puzzle' database
     todays_puzzle = generate_puzzle()
     db.session.add(todays_puzzle)
     db.session.commit()
 
     return json.dumps(todays_puzzle.sharks_locations)
 
+#TODO: to be moved to controllers (?)
+# Generates a string with 10 numbers, each number represents a shark location
 def generate_puzzle():
     numTiles = 100
     numShark = 10
@@ -115,3 +157,16 @@ def generate_puzzle():
     puzzle.date = datetime.today().strftime('%Y-%m-%d')
 
     return puzzle
+
+#TODO: to be moved API (?) 
+# Stores admin created shark locations in the 'Puzzle' database
+@app.route('/admin', methods=['POST'])
+def upload_puzzle():
+    data = request.get_json() or {}
+    new_puzzle = Puzzle() 
+    #TODO: if date is not today or in the past otherwise send ERROR as a response
+    new_puzzle.date = datetime.strptime((data['date']),'%Y-%m-%d').date()
+    new_puzzle.sharks_locations = data['sharks_locations']
+    db.session.add(new_puzzle)
+    db.session.commit()
+    return data, 201
