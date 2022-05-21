@@ -1,5 +1,5 @@
 // statistics table tab
-
+// When tab button is clicked, all tabs will be reset to invisible then only the tab click will be visible
 function openStat(event, tabName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");

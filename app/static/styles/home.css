@@ -310,13 +310,12 @@ h1>a:hover {
 }
 /* nav sign-in buttom changed when user is signed in Class name changed from sign_in_box to sign_out_box 
 and change style display toggled block and none */
-.sign_out_box {
-    text-align: center;
-}
 .sign_out_box>p {
-    margin-bottom:0.5vh;
+    float: right;
+    margin-bottom: 0;
 }
 .sign_out_box>a {
+    float: right;
     font-size: 1.2vw;
     background-color:rgb(148, 205, 248);
     border: 0.1vw solid rgb(125, 193, 245);
@@ -331,5 +330,65 @@ and change style display toggled block and none */
     text-decoration: none;
 }
 
+/* Statistics page CSS */
+.stats-contents {
+    margin: 0 12.5%;
+    max-height: 90vh;
+}
+.stats-contents>h3 {
+    text-align: center;
+    margin-top: 3vw;
+}
+.filter {
+    padding: 0.5vw 1vw;
+}
+.filter>p {
+    display: inline-block;
+    margin: 0;
+}
+.who {
+    color: #777;
+}
+.stats-contents .table-bordered {
+    background-color: #fff;
+    text-align: center;
+    border-color: #444;
+}
+.stats-contents tbody>tr:hover {
+    background-color: rgb(179, 221, 253);
+    color: #444;
+}
+/* tab(Statistics page tables) */
+.tab {
+    overflow: hidden;
+    float: right;
+}
+.tab button:hover {
+    color: #888;
+}
+.tab button.active {
+    color: rgb(90, 179, 247);
+    font-weight: bold;
+}
+.tabcontent {
+    display: none;
+    width: 100%;
+    max-height: 75vh;
+    overflow: scroll;
+}
 
 
+/* Admin page CSS */
+.admin-contents {
+    background-color: #fff;
+    max-width: 90vh;
+    margin: 0 12.5%;
+}
+.admin-contents>form {
+    padding: 8vh 3vw;
+    text-align: center;
+}
+.admin-text {
+    width: 16%;
+    margin: 0.5vh 0.2vw;
+}
