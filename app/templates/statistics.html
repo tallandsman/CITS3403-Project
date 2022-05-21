@@ -133,8 +133,6 @@
             <button class="order btn">Order</button>
             <div class="tab">
                 <button class="tablinks btn active" onclick="openStat(event, 'personal')">Personal</button>
-                <!-- friends is disabled for now -->
-                <!-- <button class="tablinks btn" onclick="openStat(event, 'friends')">friends</button>  -->
                 <button class="tablinks btn" onclick="openStat(event, 'global')">Global</button>
             </div>
         </div>
@@ -157,11 +155,11 @@
                         <td> {{ g['Date'] }} </td>
                         <td> {{ g['Time'] }} seconds </td>
                         {% if g['Win'] == True %}
-                        <tr>
+                        <th>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
                                 <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
                             </svg>
-                        </tr>
+                        </th>
                         {% elif g['Win'] == False %}
                         <th>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
@@ -175,105 +173,6 @@
                 {% endfor %}
             </table>
         </div>
-        <!-- Disabled for now -->
-<!--         <div id="friends" class="tabcontent">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Rank</th>
-                        <th>Name</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Win?</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>3</td>
-                        <td>friends</td>
-                        <td>06/05/2022</td>
-                        <td>3:00 mins</td>
-                        <th>Yes</th>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Ali</td>
-                        <td>06/05/2022</td>
-                        <td>3:00 mins</td>
-                        <th>Yes</th>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Ali</td>
-                        <td>06/05/2022</td>
-                        <td>3:00 mins</td>
-                        <th>Yes</th>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Ali</td>
-                        <td>06/05/2022</td>
-                        <td>3:00 mins</td>
-                        <th>Yes</th>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Ali</td>
-                        <td>06/05/2022</td>
-                        <td>3:00 mins</td>
-                        <th>Yes</th>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Ali</td>
-                        <td>06/05/2022</td>
-                        <td>3:00 mins</td>
-                        <th>Yes</th>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Ali</td>
-                        <td>06/05/2022</td>
-                        <td>3:00 mins</td>
-                        <th>Yes</th>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Ali</td>
-                        <td>06/05/2022</td>
-                        <td>3:00 mins</td>
-                        <th>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
-                                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                            </svg>
-                        </th>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Ali</td>
-                        <td>06/05/2022</td>
-                        <td>3:00 mins</td>
-                        <th>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
-                                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                            </svg>
-                        </th>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Ali</td>
-                        <td>06/05/2022</td>
-                        <td>3:00 mins</td>
-                        <th>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
-                                <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
-                            </svg>
-                            </th>
-                    </tr>
-                </tbody>
-            </table>
-        </div> -->
         <!-- Game stats table : Global (all users) -->
         <div id="global" class="tabcontent">
             <table class="table table-bordered">
@@ -294,11 +193,11 @@
                         <td> {{ g['Date'] }} </td>
                         <td> {{ g['Time'] }} seconds </td>
                         {% if g['Win'] == True %}
-                        <tr>
+                        <th>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
                                 <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
                             </svg>
-                        </tr>
+                        </th>
                         {% elif g['Win'] == False %}
                         <th>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
