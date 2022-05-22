@@ -37,7 +37,7 @@
     <!-- Navigation bar section start ****************************************** -->
     <nav>
         <!-- Menu Button -->
-        <div class="menu_btn_box col-3">
+        <div class="menu_btn_box col-2 col-lg-3">
             <button onClick="menuDown()" class="menu_btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
@@ -73,10 +73,10 @@
             </li>
         </ul>
         <!-- h1 tag for game name -->
-        <h1 class="col-6"><a class="title" href="{{ url_for('index') }}">SHARK ATTACK</a></h1>
+        <h1 class="col-4 col-lg-6"><a class="title" href="{{ url_for('index') }}">SHARK ATTACK</a></h1>
         {%if current_user.is_anonymous %}
         <!-- Sign-in button -->
-        <div class="sign_in_box col-3">
+        <div class="sign_in_box col-6 col-lg-3">
             <a class="sign_in_btn" href="{{ url_for('sign_in') }}">
                 <svg class="nav_icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
@@ -87,10 +87,7 @@
         </div>
         {% else %}
         <!-- Sign-out button: when user is singed in -->
-        <div class="sign_out_box col-3">
-            <!-- TODO: get username -->
-            <p class="vertical-center">Hello, {{ current_user.username }}!</p>
-            <!-- TODO: address needed for signing out -->
+        <div class="sign_out_box col-6 col-lg-3">
             <a href="{{ url_for('logout') }}">
                 <svg class="nav_icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
@@ -98,6 +95,7 @@
                 </svg>
                 Sign-out
             </a>
+            <p class="">Hello, {{ current_user.username }}!</p>
         </div>
         {% endif %}
     </nav>

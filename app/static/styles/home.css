@@ -376,8 +376,10 @@ h1>a:hover {
 /* nav sign-in buttom changed when user is signed in Class name changed from sign_in_box to sign_out_box 
 and change style display toggled block and none */
 .sign_out_box>p {
-    float: right;
-    margin-bottom:0;
+    margin-bottom: 0;
+    font-size: 2vh;
+    margin-right: 2vw;
+    margin-top: 0.5vh;
 }
 
 .sign_out_box>a {
@@ -491,6 +493,9 @@ and change style display toggled block and none */
     overflow: hidden;
     float: right;
 }
+.tab button {
+    font-size: 2vh;
+}
 .tab button:hover {
     color: #888;
 }
@@ -503,6 +508,11 @@ and change style display toggled block and none */
     height: 70vh;
     width: 100%;
     overflow: scroll;
+}
+
+.tabcontent th, .tabcontent td {
+    font-size: 1.5vh;
+    padding: 1.5vh 1vw;
 }
 
 /* Admin page CSS */

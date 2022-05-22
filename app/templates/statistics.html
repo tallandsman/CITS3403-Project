@@ -5,10 +5,10 @@
     <div class="stats-contents col-9 vertical-center">
         <h3>Statistics</h3>
         <div class="filter">
-            <p>Filters:</p>
+            <!-- <p>Filters:</p>
             <button class="who btn dropdown-toggle">Who?</button>
             <button class="order btn">Order</button>
-            <button class="btn" onclick="sortByDate()">Sort by Date</button>
+            <button class="btn" onclick="sortByDate()">Sort by Date</button> -->
             <div class="tab">
                 <button class="tablinks btn active" onclick="openStat(event, 'personal')">Personal</button>
                 <button class="tablinks btn" onclick="openStat(event, 'global')">Global</button>
@@ -34,13 +34,13 @@
                         <td> {{ g['Time'] }} seconds </td>
                         {% if g['Win'] == True %}
                         <th>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
                                 <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
                             </svg>
                         </th>
                         {% elif g['Win'] == False %}
                         <th>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
                                 <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
                             </svg>
