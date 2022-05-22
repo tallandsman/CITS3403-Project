@@ -1,7 +1,7 @@
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-# database and cryptography key configuration 
+# database URI and cryptography key configuration 
 class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'super-secret-key'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
