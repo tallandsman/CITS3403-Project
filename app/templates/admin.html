@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Admin content *********************************** -->
+    <div class="admin-contents col-9">
+        <form method="POST">
+            <h6 class="font-weight-bold">Admin Centre</h6>
+            <p>
+                To uppload a new game please enter 10 UNIQUE numbers
+                ranging from 0 - 99 (inclusive). Each number represents the shark 
+                location on the game board.
+            </p>
+            <p style="color: red;">Only future dates are accepted</p>
+            {{ form.hidden_tag() }}
+            {% for field in form  %}
+                {% if field != form.date and field != form.submit  %}
+                <li style=" list-style-type: none;  display : inline;"> 
+                    {{ field.label_tag }} {{ field }} 
+                </li> 
+                {% endif  %}
+            {% endfor %}
+            <br>
+            <br>
+            <div>
+                {{ form.date.label }}:
+                {{ form.date(size=64) }}<br>
+                {% for error in form.date.errors %}
+                <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+            </div>
+            {{form.submit(class_="btn btn-outline-primary mt-2") }}<br>
+            {% for error in form.submit.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </form>
+    </div>
+    <!-- Admin content end *********************************** -->
+
+{% endblock %}
