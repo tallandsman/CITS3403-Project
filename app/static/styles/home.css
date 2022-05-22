@@ -2,7 +2,7 @@
 
 body {
     background-color: rgb(231,245,255);
-
+	/* font-size: 2vw; */
 }
 
 /* Make a one page that doesn't make scroll */
@@ -196,7 +196,7 @@ to fill the space of the div without expanding it. */
     width: 100%;
     height: 100%;
     margin: 0;
-    font-size: 1vw;
+    font-size: 1.5vh;
 
     position: relative;
     top: 75%;
@@ -224,6 +224,14 @@ to fill the space of the div without expanding it. */
     position: relative;
     height: 90vh;
     max-height: 90vh;
+}
+
+#statusLine {
+	font-size: 2vh;
+}
+
+#startButton {
+	font-size: 2vh;
 }
 
 /* Popup How to play */
@@ -425,6 +433,26 @@ and change style display toggled block and none */
 .popupSection {
 	margin: 5%;
 }
+
+.popupSection p {
+	font-size: 2vh;
+}
+
+.popupSection h3 {
+	font-size: 3vh;
+}
+
+.popupBtn {
+	background-color: #d6d6d6;
+	border: 0.1vw solid #c4c4c4;
+	border-radius: 0.5vw;
+}
+
+.popupBtn:hover {
+	background-color: #b1b1b1;
+	border: 0.1vw solid #a3a3a3;
+}
+
 /* Admin page CSS */
 
 .admin-contents {
@@ -441,4 +469,8 @@ and change style display toggled block and none */
 .admin-text {
     width: 16%;
     margin: 0.5vh 0.2vw;   
+}
+
+#gameInfoBanner h3, #gameInfoBanner h6 {
+	font-size: 2vh;
 }
