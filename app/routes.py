@@ -1,11 +1,13 @@
-from turtle import title
-from flask import render_template, redirect, flash, url_for, request, jsonify
-from flask_login import current_user, login_user, logout_user, login_required
+from operator import and_
+from flask import render_template, redirect, flash, url_for, request
+from flask_login import current_user, login_user, logout_user
 from datetime import datetime
 
 from app import app, db
 from app.forms import SignInForm, SignUpForm, AdminUploadGameForm
 from app.models import User, Game_Statistics, Puzzle
+
+from sqlalchemy import and_
 
 import random
 import json
@@ -105,6 +107,16 @@ def get_individual_game_stats(id):
 @app.route('/gamestats', methods=['POST'])
 def game_stats():
     data = request.get_json() or {}
+    
+    # Gets today's game stats data for the current user
+    current_user_data = db.session.query(Game_Statistics).filter((Game_Statistics.user_id == current_user.get_id()) & 
+                                        (Game_Statistics.user_id == current_user.get_id())).all()
+
+    """ only record the first game results into game stats db
+        for any further games played, stats are not recorded in the db """
+    if current_user_data is not None and current_user_data != []:
+        return data,304
+
     game_stats = Game_Statistics() 
     game_stats.user_id = current_user.get_id()
     game_stats.date = datetime.strptime((data['date']),'%Y-%m-%dT%H:%M:%S.000Z').date()
@@ -163,6 +175,9 @@ def generate_puzzle():
 # Stores admin created shark locations in the 'Puzzle' database
 @app.route('/admin', methods=['GET', 'POST'])
 def upload_puzzle():
+    if current_user.role != 'admin':
+        flash('Admin access only')
+        return redirect(url_for('index'))
     form = AdminUploadGameForm()
     if form.validate_on_submit():
         sharksLocations = '{},{},{},{},{},{},{},{},{},{}'.format(form.number_1.data,form.number_2.data,form.number_3.data,form.number_4.data,
