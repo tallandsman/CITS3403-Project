@@ -396,6 +396,7 @@ function endGamePopup(time, win) {
 
 	let clipboard = document.createElement("button");
 	clipboard.id = "clipboard";
+	clipboard.classList.add("popupBtn");
 	clipboard.appendChild(document.createTextNode("Copy"));
 
 	shareDiv.appendChild(shareHeader);
@@ -409,6 +410,7 @@ function endGamePopup(time, win) {
 
 	let closeButton = document.createElement("button");
 	closeButton.id = "closeButton";
+	closeButton.classList.add("popupBtn");
 	closeButton.appendChild(document.createTextNode("CLOSE"));
 
 	buttonDiv.appendChild(closeButton);
