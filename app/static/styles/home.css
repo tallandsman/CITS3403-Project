@@ -412,4 +412,17 @@ and change style display toggled block and none */
 	text-align: center;
 }
 
+#btnDiv {
+	position: absolute;
+	bottom: 0;
+}
+
+.popupSectionHeader {
+	text-align: left;
+}
+
+.popupSection {
+	margin: 5%;
+}
+
 

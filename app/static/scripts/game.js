@@ -279,7 +279,39 @@ function sendStats(DBurl, compTime, gameOutcome) {
 	})
 }
 
-function endGamePopup() {
+function ackCopy() {
+	let ack = document.createElement("p");
+	ack.innerText = "Copied to Clipboard";
+	ack.style = "font-style: italic;";
+	document.getElementById("shareDiv").appendChild(ack);
+}
+
+function copyToClipboard(time, win) {
+	if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+		let date = new Date()
+		let fullDate = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+		if (win) {
+			str = "SHARKATTACK (" + fullDate + "):\nGame Win\nTime: " + time[0] + "m & " + time[1] + "s"
+		}
+		else {
+			str = "SHARKATTACK (" + fullDate + "):\nGame Loss\nTime: " + time[0] + "m & " + time[1] + "s"
+		}
+		ackCopy();
+		return navigator.clipboard.writeText(str);
+	}
+  	return Promise.reject('The Clipboard API is not available.');
+}
+
+function closePopup() {
+	let popup = document.getElementById("popupBgDiv");
+	popup.parentElement.removeChild(popup);
+}
+
+/**
+ * Function that dynamically creates the HTML popup that
+ * triggers upon game completion.
+ */
+function endGamePopup(time, win) {
 	
 	// Creating a div element that holds the contents 
 	//of the end game popup
@@ -298,26 +330,98 @@ function endGamePopup() {
 	popupHeader.id = "popupHeader";
 
 	let header;
-	if (window.win) {
-		header = "ANOTHER DAY, ANOTHER SAFE BEACH";
+	let statmsg;
+	if (win) {
+		header = "ALL SHARKS SPOTTED!";
+		statmsg = "You cleared the beach in ";
 	}
 	else {
 		header = "SHARK ATTACK!";
+		statmsg = "You were attacked by a shark after ";
 	}
 	let text = document.createTextNode(header);
 
 	popupHeader.appendChild(text);
 	popupBox.appendChild(popupHeader);
+	
+	// Stat section
+	let statDiv = document.createElement("div");
+	statDiv.id = "statDiv";
+	statDiv.classList.add("popupSection");
+
+	let statHeader = document.createElement("h3");
+	statHeader.id = "statHeader";
+	statHeader.classList.add("popupSectionHeader");
+	statHeader.innerText = "Statistics";
+
+	let statBody = document.createElement("p");
+	statBody.id = "statBody";
+	let minutes = time[0];
+	let seconds = time[1];
+	let minString;
+	let secString;
+	if (minutes == 1) {
+		minString = " minute"
+	}
+	else {
+		minString = " minutes"
+	}
+	if (seconds == 1) {
+		secString = " second."
+	}
+	else {
+		secString = " seconds."
+	}
+
+	if (minutes > 1){ 
+		statBody.innerText = statmsg + minutes + minString + " and " + seconds + secString;
+	}
+	else {
+		statBody.innerText = statmsg + seconds + secString;
+	}
+
+	statDiv.appendChild(statHeader);
+	statDiv.appendChild(statBody);
+	popupBox.appendChild(statDiv);
+
+	// Share section
+	let shareDiv = document.createElement("div");
+	shareDiv.id = "shareDiv";
+	shareDiv.classList.add("popupSection");
+
+	let shareHeader = document.createElement("h3");
+	shareHeader.id = "shareHeader";
+	shareHeader.classList.add("popupSectionHeader");
+	shareHeader.innerText = "Share";
+
+	let clipboard = document.createElement("button");
+	clipboard.id = "clipboard";
+	clipboard.appendChild(document.createTextNode("Copy"));
+
+	shareDiv.appendChild(shareHeader);
+	shareDiv.appendChild(clipboard);
+	popupBox.appendChild(shareDiv);
+
+	// Button section
+	let buttonDiv = document.createElement("div");
+	buttonDiv.id = "btnDiv";
+	buttonDiv.classList.add("popupSection");
+
+	let closeButton = document.createElement("button");
+	closeButton.id = "closeButton";
+	closeButton.appendChild(document.createTextNode("CLOSE"));
+
+	buttonDiv.appendChild(closeButton);
+	popupBox.appendChild(buttonDiv);
+
 	popupBgDiv.appendChild(popupBox);
 	document.getElementsByClassName("one-page")[0].appendChild(popupBgDiv);
 
-	console.log("Hello");
+	$("#closeButton").on("click", closePopup);
 
-}
-
-function shareButton() {
-	let button = document.getElementById("startButton");
-	button.textContent = "SHARE";
+	$("#clipboard").on("click", function () {
+		copyToClipboard(time, win);
+	});
 }
 
 /**
@@ -325,19 +429,19 @@ function shareButton() {
  */
 function gameWin() {
 
-	window.win = true;
+	let win = true;
 	document.getElementById("statusLine").innerHTML = "The beach is safe!";
 
     // Stop Timer
 	let time = stopTimer();
 
-	shareButton();
-
-	sendStats("/gamestats", time[0]*60 + time[1], window.win);
+	sendStats("/gamestats", time[0]*60 + time[1], win);
 
 	let popupDelay = 1000 // 1second
 
-	setTimeout(endGamePopup, popupDelay);
+	setTimeout(function() {
+		endGamePopup(time, win)
+	}, popupDelay);
 }
 
 /**
@@ -346,18 +450,17 @@ function gameWin() {
  */
 function gameOver() {
 
-	window.win = false;
-
+	let win = false;
     revealBoard();
 	let time = stopTimer();
 
-	shareButton();
-
-	sendStats("/gamestats", time[0]*60 + time[1], window.win);
+	sendStats("/gamestats", time[0]*60 + time[1], win);
 
 	let popupDelay = 1000 // 1second
 
-	setTimeout(endGamePopup, popupDelay);
+	setTimeout(function() {
+		endGamePopup(time, win)
+	}, popupDelay);
 }
 
 /**
