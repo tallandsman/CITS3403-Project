@@ -452,6 +452,52 @@ and change style display toggled block and none */
 	background-color: #b1b1b1;
 	border: 0.1vw solid #a3a3a3;
 }
+/* Statistics Page CSS */
+.stats-contents {
+    margin: 0 12.5%;
+    max-height: 80vh;
+}
+.stats-contents>h3 {
+    text-align: center;
+    margin-top: 3vw;
+}
+.filter {
+    padding: 0.5vw 1vw;
+}
+.filter>p {
+    display: inline-block;
+    margin: 0;
+}
+.who {
+    color: #777;
+}
+.stats-contents .table-bordered {
+    background-color: #fff;
+    text-align: center;
+    border-color: #444;
+}
+.stats-contents tbody>tr:hover {
+    background-color: rgb(179, 221, 253);
+    color: #444;
+}
+
+/* tab */
+.tab {
+    overflow: hidden;
+    float: right;
+}
+.tab button:hover {
+    color: #888;
+}
+.tab button.active {
+    color: rgb(90, 179, 247);
+    font-weight: bold;
+}
+.tabcontent {
+    display: none;
+    height: 70vh;
+    overflow: scroll;
+}
 
 /* Admin page CSS */
 
