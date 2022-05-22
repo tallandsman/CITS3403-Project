@@ -305,7 +305,7 @@ function ackCopy() {
 }
 
 /**
- * Function that will copy a users game results to their
+ * Function that will copy a user's game results to their
  * clipboard. This message will change depending on the game's
  * outcome.
  */
@@ -459,8 +459,8 @@ function endGamePopup(time, win) {
 	// Button to share the game results to the clipboard.
 	let clipboard = document.createElement("button");
 	clipboard.id = "clipboard";
-	clipboard.classList.add("popupBtn");
-	clipboard.appendChild(document.createTextNode("Copy"));
+	clipboard.classList.add("buttons");
+	clipboard.appendChild(document.createTextNode("COPY"));
 
 	// Connecting the share section elements to the pop-up
 	shareDiv.appendChild(shareHeader);
@@ -475,7 +475,7 @@ function endGamePopup(time, win) {
 	// Button used to close the pop-up
 	let closeButton = document.createElement("button");
 	closeButton.id = "closeButton";
-	closeButton.classList.add("popupBtn");
+	closeButton.classList.add("buttons");
 	closeButton.appendChild(document.createTextNode("CLOSE"));
 
 	// Connecting the share section elements to the pop-up
