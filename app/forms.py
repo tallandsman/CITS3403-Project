@@ -4,13 +4,13 @@ from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Nu
 from app.models import User
 import datetime
 
-# Class to hold fields for sign in page
+# Class to hold fields for sign in form
 class SignInForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Sign In')
 
-# Class to hold fields for sign up page
+# Class to hold fields for sign up form
 class SignUpForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
@@ -18,13 +18,13 @@ class SignUpForm(FlaskForm):
     password2 = PasswordField('Repeat Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Submit')
 
-    # No duplicate usernames
+    # No duplicate usernames are allowed
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
         if user is not None:
             raise ValidationError('Please use a different username.')
     
-    # No duplicate emails
+    # No duplicate emails are allowed
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
@@ -45,12 +45,12 @@ class AdminUploadGameForm(FlaskForm):
     date = DateField('Date',validators=[DataRequired()])
     submit = SubmitField('Submit')
     
-    # Validates the date - not today or in the past as admin can only upload future puzzles
+    # Validates the date - cannot be today or in the past as admin can only upload future puzzles
     def validate_date(form, date):
         if date.data <= datetime.date.today():
             raise ValidationError("The date cannot be today or in the past!")
     
-    # Validates that all 10 different numbers are unique - as each shark location is unique
+    # Validates that all 10 different location numbers are unique - as each shark location is unique
     def validate_submit(form, submit):
         input_numbers = [form.number_1.data, form.number_2.data, form.number_3.data, form.number_4.data, form.number_5.data, form.number_6.data,
                          form.number_7.data, form.number_8.data, form.number_9.data, form.number_10.data]
