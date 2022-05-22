@@ -1,9 +1,10 @@
+from turtle import title
 from flask import render_template, redirect, flash, url_for, request, jsonify
 from flask_login import current_user, login_user, logout_user, login_required
 from datetime import datetime
 
 from app import app, db
-from app.forms import SignInForm, SignUpForm
+from app.forms import SignInForm, SignUpForm, AdminUploadGameForm
 from app.models import User, Game_Statistics, Puzzle
 
 import random
@@ -14,7 +15,7 @@ from werkzeug.urls import url_parse
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('home.html')
+    return render_template('home.html', title='Shark Attack')
 
 @app.route('/signin', methods=['GET', 'POST'])
 def sign_in():
@@ -60,7 +61,7 @@ def logout():
 def statistics():
     games = get_all_game_stats()
     individal_games = get_individual_game_stats(current_user.get_id())
-    return render_template('statistics.html', games=games, individal_games=individal_games)
+    return render_template('statistics.html', title= 'Statistics', games=games, individal_games=individal_games)
 
 #TODO: to be moved into contollers 
 # returns all games statistics
@@ -158,15 +159,21 @@ def generate_puzzle():
 
     return puzzle
 
-#TODO: to be moved API (?) 
+#TODO: to be moved API (?) & ONLY ADMIN ACCESS
 # Stores admin created shark locations in the 'Puzzle' database
-@app.route('/admin', methods=['POST'])
+@app.route('/admin', methods=['GET', 'POST'])
 def upload_puzzle():
-    data = request.get_json() or {}
-    new_puzzle = Puzzle() 
-    #TODO: if date is not today or in the past otherwise send ERROR as a response
-    new_puzzle.date = datetime.strptime((data['date']),'%Y-%m-%d').date()
-    new_puzzle.sharks_locations = data['sharks_locations']
-    db.session.add(new_puzzle)
-    db.session.commit()
-    return data, 201
+    form = AdminUploadGameForm()
+    if form.validate_on_submit():
+        sharksLocations = '{},{},{},{},{},{},{},{},{},{}'.format(form.number_1.data,form.number_2.data,form.number_3.data,form.number_4.data,
+                          form.number_5.data,form.number_6.data, form.number_7.data, form.number_8.data, form.number_9.data, form.number_10.data)
+        # If there's a puzzle already stored for that date, delete it and overwrite it with new puzzle
+        if db.session.query(Puzzle).filter(Puzzle.date == form.date.data) is not None:
+            db.session.query(Puzzle).filter(Puzzle.date == form.date.data).delete()
+        new_puzzle = Puzzle() 
+        new_puzzle.date = form.date.data
+        new_puzzle.sharks_locations = sharksLocations
+        db.session.add(new_puzzle)
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('admin.html', title='Admin Centre', form=form)
