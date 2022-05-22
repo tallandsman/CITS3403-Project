@@ -54,6 +54,17 @@ vertically. */
     padding: 0!important;
 }
 
+/* Makes the selected element visible */
+.show_popup {
+    visibility: visible;
+}
+
+/* Styling for the horizontal rectangle tag */
+hr {
+    border: 0.01vw solid #888;
+    margin: 0.1vw 0;
+}
+
 /* -------------------------------------------------------------------------------------- */
 
 /* GENERAL DESIGN STYLING */
@@ -223,7 +234,9 @@ to fill the space of the div without expanding it. */
 /* -------------------------------------------------------------------------------------- */
 
 /* HOW-TO-PLAY POP-UP SPECIFIC STYLING */
-.popup_howtoplay {
+
+/* Styling for the outermost how-to-play pop-up container */
+.popup-howtoplay {
     width: 100%;
     max-height: 90vh;
     height: 90%;
@@ -233,7 +246,9 @@ to fill the space of the div without expanding it. */
     z-index: 999;
     visibility: hidden;
 }
-.box_howtoplay {
+
+/* Styling for the how-to-play section */
+.box-howtoplay {
     max-width: 75%;
     max-height: 80%;
     margin: 0 12.5%;
@@ -241,29 +256,32 @@ to fill the space of the div without expanding it. */
     background-color: #fff;
     text-align: left;
 }
-.close_btn {
+
+/* Styling for the close button to sit at the top right of the pop-up */
+#close-btn {
     position: absolute;
     top: 0;
     right: 0;
 }
-h5 {
+
+/* Styling for any <h5> tag that is a child of element of class .box_howtoplay */
+.box-howtoplay>h5 {
     margin: 0.8vw 0;
-    font-size: 1.3vw;
+    font-size: 2vw;
+	font-weight: bold;
 }
-.box_howtoplay>p {
+
+/* Styling for any <p> tag that is a child of element of class .box_howtoplay */
+.box-howtoplay>p {
     text-align: justify;
-    font-size: 1.1vw;
-}
-hr {
-    border: 0.01vw solid #888;
-    margin: 0.1vw 0;
-}
-.show_popup {
-    visibility: visible;
+	font-size: 1vw;
 }
 
+/* -------------------------------------------------------------------------------------- */
 
-/* Navigation bar */
+/* NAVIGATION BAR SPECIFIC STYLING */
+
+/* General styling for the <nav> tag */
 nav {
     width: 100%;
     height: 8vh;
@@ -275,9 +293,13 @@ nav {
     display: flex;
     align-items: center;
 }
+
+/* Aligns the menu btn to the left-side of the navigation bar */
 .menu_btn_box {
     text-align: left;
 }
+
+/* Styling for the menu button */
 .menu_btn {
     background-color: #fff;
     border: 0.1vw solid #888;
@@ -286,14 +308,20 @@ nav {
     color: #888;
     margin: 0 3vw;
 }
+
+/* Hover styling for the menu button */
 .menu_btn:hover {
     color: #fff;
     background-color: rgb(93, 171, 230);
     border-color: rgb(93, 171, 230);
 }
+
+/* Styling for the icons used in the navigation bar */
 .nav_icon {
     margin: 0 5px 2px 0;
 }
+
+/* Class that is applied to the menu that appears once the menu button is clicked */
 .down_menu {
     position: absolute;
     left: 0;
