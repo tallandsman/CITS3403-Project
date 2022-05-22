@@ -7,7 +7,7 @@
             <div class="row">
 
                 <!-- Content Div -->
-                <div class="col-6 offset-3" id="contentDiv">
+                <div class="no-padding col-6 offset-3" id="contentDiv">
                     
                     <!-- Game Wrapper Container -->
                     <!-- Used to wrap up all the elements of the game into a container 
@@ -17,13 +17,13 @@
                     <div class="vertical-center col-12 top-padding" id="gameWrapper">
 
                         <!-- Game info banner -->
-                        <div class="col-10 offset-1" id="gameInfoBanner">
+                        <div id="gameInfoBanner">
                             <div class="row">
                                 <!-- Flag Information -->
                                 <div class="d-flex justify-content-center col-4">
                                     <div class="vertical-center">
                                         <h6 class="halign-text">Flags Left:</h6>
-                                        <h6 class="halign-text" id="flagsLeft">?</h6>
+                                        <h6 class="halign-text" id="flagsLeft"></h6>
                                     </div>
                                 </div>
 
@@ -38,25 +38,25 @@
                                 <div class="d-flex justify-content-center col-4">
                                     <div class="vertical-center">
                                         <h6 class="halign-text">Sharks in the area:</h6>
-                                        <h6 class="halign-text" id="sharkNum">?</h6>
+                                        <h6 class="halign-text" id="sharkNum"></h6>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Game Board -->
-                        <div class="square no-padding d-flex justify-content-center panel hardBorder col-10 offset-1" id="gameBoard">
-                            <!-- Board Grid Table 10x10 -->
-                            <!-- <table class="vertical-center" id="boardTable">
-                            </table> -->
-                        </div>
+							<div class="panel horizontal-center" id="gameBoard">
+								<!-- Board Grid Table 10x10 -->
+								<!-- <table class="vertical-center" id="boardTable">
+								</table> -->
+							</div>
 
                         <!-- Status Panel -->
                         <div class="col-12">
-                            <div class="softBorder panel col-10 offset-1" id="buttonPanel">
+                            <div class="softBorder panel col-8 offset-2" id="buttonPanel">
                                 <div class="row">
                                     <div class="col-10 offset-1">
-                                            <h4 class="valign-text halign-text" id="statusLine">Status: Beach In Danger</h4>
+                                            <h4 class="valign-text halign-text" id="statusLine">Press <span id="statusSpan">START</span> to begin</h4>
                                     </div>
                                 </div>
                             </div>
@@ -64,13 +64,10 @@
 
                         <!-- Board Buttons Panel -->
                         <div class="col-12">
-                            <div class="softBorder panel col-4 offset-4" id="buttonPanel">
+                            <div class="softBorder panel col-2 offset-5" id="buttonPanel">
                                 <div class="row"> 
-                                    <div class="d-flex justify-content-center col-3 offset-2">
-                                        <button class="buttonBorder softBorder" id="restartButton">Restart</button>
-                                    </div>
-                                    <div class="d-flex justify-content-center col-3 offset-2">
-                                        <button class="buttonBorder">Share</button>
+                                    <div class="horizontal-center">
+                                        <button class="no-game buttonBorder" id="startButton">START</button>
                                     </div>
                                 </div>
                             </div>

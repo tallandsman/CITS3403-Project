@@ -20,8 +20,21 @@ vertically. */
     top: 50%;
     transform: translateY(-50%);
 }
+
+#gameBoard *.vertical-center {
+    margin-top: 0;
+	margin-bottom: 0;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
 /* In order to center an element horizontally, apply the classes
 ".d-flex" and "justify-content-center" to the parent container */
+
+.horizontal-center {
+	margin: auto;
+	width: auto;
+}
 
 /* Causes the element to maintain repsonsive square styling */
 .square:after {
@@ -62,7 +75,8 @@ vertically. */
 /* The general styling to create a "panel" when applied to an element. */
 .panel {
     background-color: #f1f0f0;
-    margin: 1vw;
+    margin-top: 1vw;
+	margin-bottom: 1vw;
     box-shadow: 0 1rem 3rem rgba(0,0,0,.35);
 }
 
@@ -84,6 +98,28 @@ vertically. */
     border: 0.1vw solid #ebeaea;
     border-radius: 0.5vw;
     margin: 10px;
+}
+
+.no-game {
+	background-color: #009900;
+	color: #ffffff;
+	border: 0.1vw solid #007200;
+}
+
+.no-game:hover {
+	background-color: #00bb00;
+}
+
+.no-game:focus {
+	border: 0.1vw solid #007200;
+}
+
+.game {
+	background-color: #a5a5a5;
+}
+
+.game:focus {
+	border: 0.1vw solid #707070;
 }
 
 /* -------------------------------------------------------------------------------------- */
@@ -114,6 +150,7 @@ size changes. */
 /* The styling of each unrevealed cell upon mouse over */
 .unidentified:hover {
     background-color: #9c9c9c;
+	cursor: pointer;
 }
 
 .unidentified *:not(.flag) {
@@ -133,9 +170,24 @@ size changes. */
 
 /* Changing the size of the game board table to take up a 
 specified amount of its panel that it is within. */
+#boardDiv {
+    width: 45vh;
+    height: 45vh;
+}
+
 #boardTable {
-    width: 85%;
-    height: 85%;
+	height: 100%;
+	width: 100%;
+}
+
+#gameBoard {
+	width: 50vh;
+	height: 50vh
+}
+
+#startDiv {
+	width: 100%;
+	height: 100%;
 }
 
 /* Styles each paragraph element within a game board cell
@@ -332,6 +384,47 @@ and change style display toggled block and none */
     text-decoration: none;
 }
 
+.pop-up {
+	
+	position: absolute;
+
+	left: 50%;
+	top: 50%;
+
+    transform: translate(-50%, -50%);
+}
+
+#popupBgDiv {
+	background-color: #ffffff70;
+	width: 100%;
+	height: 100%;
+}
+
+#popupBox {
+	background-color: #ffffff;
+	width: 50vw;
+	height: 50vh;
+
+	border-radius: 2vw;
+}
+
+#popupHeader {
+	margin: 5%;
+	text-align: center;
+}
+
+#btnDiv {
+	position: absolute;
+	bottom: 0;
+}
+
+.popupSectionHeader {
+	text-align: left;
+}
+
+.popupSection {
+	margin: 5%;
+}
 /* Admin page CSS */
 
 .admin-contents {
