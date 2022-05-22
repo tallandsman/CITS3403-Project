@@ -82,6 +82,7 @@ Tile.prototype.addNum = function() {
         h4.appendChild(text);
         cellDiv.appendChild(h4);
 
+		// Toggle on the elementShown property of the tile.
         this.elementShown = true;
     }
 
@@ -90,6 +91,7 @@ Tile.prototype.addNum = function() {
         let img = document.createElement("img");
         img.src = "../static/images/shark_nobg.png";
 
+		// Class that styles the image to fit inside the cell.
         img.classList.add("cell-img");
 
         cellDiv.appendChild(img);
@@ -143,6 +145,7 @@ Tile.prototype.reveal = function() {
     // Reveals the current tile and updates it's style.
     this.mystery = false;
 
+	// Removes the flag of the cell when revealed
 	if (this.flag) {
 		this.flag = false;
 		window.flagsLeft++;
@@ -150,8 +153,12 @@ Tile.prototype.reveal = function() {
 		
     this.updateStyle();
 
+	// Incrementing the global variable tracking the number of tiles revealed.
     window.revTiles++;
+
+	// Checks if there are any non-shark tiles left to reveal.
     if (window.revTiles == (ROW*COL - NUMSHARK)) {
+		// If not then trigger the game win.
         gameWin();
     }
 
@@ -204,23 +211,18 @@ function tileLeftClick(event) {
     let tile = window.board[rowInd][colInd];
 
     // Action changes depending on the tile clicked.
-    if (!tile.mystery) {
-        // ALREADY CLICKED
-    }
-    else if (tile.flag) {
-        // FLAGGED
-    }
-    else if (tile.shark) {
+    if (tile.shark) {
         // GAME OVER
         gameOver();
     }
-    else {
+	// If tile is not flagged or revealed, reveal it.
+    else if (tile.mystery && !tile.flag) {
         tile.reveal();
     }
 }
 
 /**
- * Will change the flag property of the tile to true.
+ * Will flagged the clicked tile.
  */
 function tileRightClick(event) {
 
@@ -232,12 +234,16 @@ function tileRightClick(event) {
     let colInd = div.parentNode.cellIndex;
     let tile = window.board[rowInd][colInd];
 
-    // Only has action if the tile is unrevealed.
+    // Only flags tiles that are not revealed and not flagged.
     if (tile.mystery && !tile.flag) {
 
+		// Can only flag if there are flags left to use
 		if (window.flagsLeft > 0) {
+
 			// Turns the flag state of the tile to true.
 			tile.flag = true;
+
+			// Decrements the flag count
 			window.flagsLeft--;
 			tile.updateStyle();
 		}
@@ -246,6 +252,8 @@ function tileRightClick(event) {
 
         // Turns the flag state of the tile to false.
         tile.flag = false;
+
+		// Increments the flag count
 		window.flagsLeft++;
         tile.updateStyle();
     }
@@ -259,17 +267,18 @@ function tileRightClick(event) {
 function sendStats(DBurl, compTime, gameOutcome) {
 
 	// Creates a datetime object to represent the date of the puzzle played.
-	// This object is rounded to the day as puzzles are created daily.
 	let gameDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
 
-	// Parameters/values to be passed to the backend are stored in a string,
-	// This allows for them to be sent in the .send() method.
+	// Parameters to be passed to the database are stored in a 
+	// dictionary.
 	var params = {
 		"date": gameDate,
 		"time": compTime,
 		"gameOutcome": gameOutcome
 	};
 
+	// AJAX POST request is sent to the flask back-end with the
+	// previously packaged dictionary of values in a JSON file.
 	$.ajax({
 		type: "POST",
 		url: DBurl,
@@ -279,85 +288,133 @@ function sendStats(DBurl, compTime, gameOutcome) {
 	})
 }
 
+/**
+ * Function that creates an acknowledgment for when the user copies
+ * their game result onto their clipboard.
+ */
 function ackCopy() {
+	
 	let ack = document.createElement("p");
 	ack.innerText = "Copied to Clipboard";
+
+	// Styling the message to be italic.
 	ack.style = "font-style: italic;";
+
+	// Appends the message underneath the copy button.
 	document.getElementById("shareDiv").appendChild(ack);
 }
 
+/**
+ * Function that will copy a user's game results to their
+ * clipboard. This message will change depending on the game's
+ * outcome.
+ */
 function copyToClipboard(time, win) {
+
+	// Checks if the navigator and its methods work with the user's
+	// current browser.
 	if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+
+		// Generates a date object of today's date and format it into a string.
 		let date = new Date()
 		let fullDate = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+
+		// Changes the message depending on if the user won or lost.
 		if (win) {
 			str = "SHARKATTACK (" + fullDate + "):\nGame Win\nTime: " + time[0] + "m & " + time[1] + "s"
 		}
 		else {
 			str = "SHARKATTACK (" + fullDate + "):\nGame Loss\nTime: " + time[0] + "m & " + time[1] + "s"
 		}
+
+		// Presents the user with an acknowledgement of the copy.
 		ackCopy();
+
 		return navigator.clipboard.writeText(str);
 	}
   	return Promise.reject('The Clipboard API is not available.');
 }
 
+/**
+ * Function that will close the game summary popup upon
+ * close button press.
+ */
 function closePopup() {
 	let popup = document.getElementById("popupBgDiv");
+
+	// Removes the whole popup element and all of its children.
 	popup.parentElement.removeChild(popup);
 }
 
 /**
- * Function that dynamically creates the HTML popup that
+ * Function that dynamically creates the HTML pop-up that
  * triggers upon game completion.
  */
 function endGamePopup(time, win) {
 	
 	// Creating a div element that holds the contents 
-	//of the end game popup
+	// of the end game pop-up. This div takes up the entire
+	// game screen to create a loss of focus effect.
 	let popupBgDiv = document.createElement("div");
-
 	popupBgDiv.id = "popupBgDiv";
 	popupBgDiv.classList.add("pop-up");
 
+	// A div that represents the actual pop-up.
 	let popupBox = document.createElement("div");
-
 	popupBox.id = "popupBox";
 	popupBox.classList.add("pop-up");
 
+	// ------------------------------------------------------------------------
+	// POP-UP HEADER
 	let popupHeader = document.createElement("h2");
-
 	popupHeader.id = "popupHeader";
 
+	// Header message that changes depending on the outcome of the game.
 	let header;
+
+	// Message for the Statistics section that will change depending
+	// on the outcome of the game.
 	let statmsg;
+
+	// If win is true
 	if (win) {
 		header = "ALL SHARKS SPOTTED!";
 		statmsg = "You cleared the beach in ";
 	}
+	// If win is false
 	else {
 		header = "SHARK ATTACK!";
 		statmsg = "You were attacked by a shark after ";
 	}
-	let text = document.createTextNode(header);
 
+	// Connect the header to the pop-up box
+	let text = document.createTextNode(header);
 	popupHeader.appendChild(text);
 	popupBox.appendChild(popupHeader);
 	
-	// Stat section
+	// ------------------------------------------------------------------------
+	// POP-UP STATISTICS SECTION
 	let statDiv = document.createElement("div");
 	statDiv.id = "statDiv";
 	statDiv.classList.add("popupSection");
 
+	// Header for the statistics section
 	let statHeader = document.createElement("h3");
 	statHeader.id = "statHeader";
 	statHeader.classList.add("popupSectionHeader");
 	statHeader.innerText = "Statistics";
 
+	// Body for the statistics section
 	let statBody = document.createElement("p");
 	statBody.id = "statBody";
+
+	// Extracts minutes and seconds from the time parameter passed.
 	let minutes = time[0];
 	let seconds = time[1];
+
+	// Strings that denote the units of the time components. These 
+	// strings need to change based on if it is one or multiple.
+	// eg. 'second' vs 'seconds'
 	let minString;
 	let secString;
 	if (minutes == 1) {
@@ -373,6 +430,8 @@ function endGamePopup(time, win) {
 		secString = " seconds."
 	}
 
+	// Formatting the body of the statistics section depending
+	// on the time passed.
 	if (minutes > 1){ 
 		statBody.innerText = statmsg + minutes + minString + " and " + seconds + secString;
 	}
@@ -380,45 +439,56 @@ function endGamePopup(time, win) {
 		statBody.innerText = statmsg + seconds + secString;
 	}
 
+	// Connecting the statistic section elements to the pop-up
 	statDiv.appendChild(statHeader);
 	statDiv.appendChild(statBody);
 	popupBox.appendChild(statDiv);
 
-	// Share section
+	// ------------------------------------------------------------------------
+	// POP-UP SHARE SECTION
 	let shareDiv = document.createElement("div");
 	shareDiv.id = "shareDiv";
 	shareDiv.classList.add("popupSection");
 
+	// Header for the share section
 	let shareHeader = document.createElement("h3");
 	shareHeader.id = "shareHeader";
 	shareHeader.classList.add("popupSectionHeader");
 	shareHeader.innerText = "Share";
 
+	// Button to share the game results to the clipboard.
 	let clipboard = document.createElement("button");
 	clipboard.id = "clipboard";
-	clipboard.classList.add("popupBtn");
-	clipboard.appendChild(document.createTextNode("Copy"));
+	clipboard.classList.add("buttons");
+	clipboard.appendChild(document.createTextNode("COPY"));
 
+	// Connecting the share section elements to the pop-up
 	shareDiv.appendChild(shareHeader);
 	shareDiv.appendChild(clipboard);
 	popupBox.appendChild(shareDiv);
 
-	// Button section
+	// POP-UP CLOSE BUTTON SECTION
 	let buttonDiv = document.createElement("div");
 	buttonDiv.id = "btnDiv";
 	buttonDiv.classList.add("popupSection");
 
+	// Button used to close the pop-up
 	let closeButton = document.createElement("button");
 	closeButton.id = "closeButton";
-	closeButton.classList.add("popupBtn");
+	closeButton.classList.add("buttons");
 	closeButton.appendChild(document.createTextNode("CLOSE"));
 
+	// Connecting the share section elements to the pop-up
 	buttonDiv.appendChild(closeButton);
 	popupBox.appendChild(buttonDiv);
 
+	// ------------------------------------------------------------------------
+	// Connecting the pop-up box to the pop-up container
 	popupBgDiv.appendChild(popupBox);
 	document.getElementsByClassName("one-page")[0].appendChild(popupBgDiv);
 
+	// ------------------------------------------------------------------------
+	// Event listeners for the 'copy' and 'close' buttons
 	$("#closeButton").on("click", closePopup);
 
 	$("#clipboard").on("click", function () {
@@ -437,10 +507,13 @@ function gameWin() {
     // Stop Timer
 	let time = stopTimer();
 
+	// Statistics are shared to the flask backend
 	sendStats("/gamestats", time[0]*60 + time[1], win);
 
+	// Delay time
 	let popupDelay = 1000 // 1second
 
+	// Pop-up on game completion is delayed.
 	setTimeout(function() {
 		endGamePopup(time, win)
 	}, popupDelay);
@@ -453,13 +526,20 @@ function gameWin() {
 function gameOver() {
 
 	let win = false;
+
+	// The unrevealed tiles are revealed so the user and see the other sharks.
     revealBoard();
+
+	// Stop timer
 	let time = stopTimer();
 
+	// Statistics are shared to the flask backend
 	sendStats("/gamestats", time[0]*60 + time[1], win);
 
+	// Delay time
 	let popupDelay = 1000 // 1second
 
+	// Pop-up on game completion is delayed.
 	setTimeout(function() {
 		endGamePopup(time, win)
 	}, popupDelay);
@@ -617,9 +697,14 @@ function startTimer() {
  */
 function updateTimer() {
 	var stopTime = new Date().getTime();
+
+	// Calculates the time between starting the game and now
 	var timeDiff = stopTime - window.startTime;
+
 	var minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
 	var seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+	// Updates the html timer elements
 	document.getElementById("timerMins").innerHTML = minutes.toLocaleString('en-US', {minimumIntegerDigits: 2});
 	document.getElementById("timerSecs").innerHTML = seconds.toLocaleString('en-US', {minimumIntegerDigits: 2});
 	return [minutes, seconds];
@@ -692,21 +777,6 @@ function gameStart() {
 }
 
 /**
- * Function that restarts and resets the timer and gameboard so that
- * the game can be restarted.
- */
-function restartGame() {
-    stopTimer();
-	document.getElementById("timerMins").innerHTML = "00";
-	document.getElementById("timerSecs").innerHTML = "00";
-	document.getElementById("flagsLeft").innerHTML = "";
-	document.getElementById("sharkNum").innerHTML = "";
-	
-	// Calls init() to reset the game state.
-	init();
-}
-
-/**
  * Function that creates the start button upon page load,
  * and also creates event listeners for page buttons.
  */
@@ -714,26 +784,7 @@ function init() {
 
 	window.inProgress = false;
 	document.getElementById("gameBoard").innerHTML = "";
-	// let panel = document.getElementById("buttonPanel")
-	// let startDiv = document.createElement("div");
-	// let startButton = document.createElement("button");
-	// let textNode = document.createTextNode("START");
-
-	// startDiv.id = "startDiv";
-
-	// startButton.classList.add("softBorder");
-	// startButton.classList.add("btn");
-	// startButton.classList.add("btn-success");
-	// startButton.classList.add("vertical-center");
-	// startButton.classList.add("horizontal-center");
-	// startButton.id = "startButton";
-
-	// startButton.appendChild(textNode);
-	// startDiv.appendChild(startButton);
-	// document.getElementById("gameBoard").appendChild(startDiv);
 
 	// Event listeners for clicking the start or restart buttons.
 	$("#startButton").on("click", gameStart);
-
-	$("#restartButton").on("click", restartGame);
 }
