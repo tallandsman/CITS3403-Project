@@ -36,6 +36,7 @@ def sign_in():
         return redirect(next_page)
     return render_template('signIn.html', title='Sign In', form=form)
 
+#TODO: Once a user is signed up, make sure it's signed in and redirect to index
 @app.route('/signup', methods=['GET', 'POST'])
 def sign_up():
     # if user is already signed in - redirect it to game page
@@ -47,8 +48,7 @@ def sign_up():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Congratulations, you are now a registered user!')
-        # Redirect users who have signed up to game page
+        login_user(user)
         return redirect(url_for('index'))
     return render_template('signUp.html', title='Sign Up', form=form)
 
