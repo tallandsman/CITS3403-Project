@@ -150,6 +150,7 @@ size changes. */
 /* The styling of each unrevealed cell upon mouse over */
 .unidentified:hover {
     background-color: #9c9c9c;
+	cursor: pointer;
 }
 
 .unidentified *:not(.flag) {
@@ -382,5 +383,33 @@ and change style display toggled block and none */
     text-decoration: none;
 }
 
+.pop-up {
+	
+	position: absolute;
+
+	left: 50%;
+	top: 50%;
+
+    transform: translate(-50%, -50%);
+}
+
+#popupBgDiv {
+	background-color: #ffffff70;
+	width: 100%;
+	height: 100%;
+}
+
+#popupBox {
+	background-color: #ffffff;
+	width: 50vw;
+	height: 50vh;
+
+	border-radius: 2vw;
+}
+
+#popupHeader {
+	margin: 5%;
+	text-align: center;
+}
 
 

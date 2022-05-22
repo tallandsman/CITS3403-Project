@@ -279,28 +279,85 @@ function sendStats(DBurl, compTime, gameOutcome) {
 	})
 }
 
+function endGamePopup() {
+	
+	// Creating a div element that holds the contents 
+	//of the end game popup
+	let popupBgDiv = document.createElement("div");
+
+	popupBgDiv.id = "popupBgDiv";
+	popupBgDiv.classList.add("pop-up");
+
+	let popupBox = document.createElement("div");
+
+	popupBox.id = "popupBox";
+	popupBox.classList.add("pop-up");
+
+	let popupHeader = document.createElement("h2");
+
+	popupHeader.id = "popupHeader";
+
+	let header;
+	if (window.win) {
+		header = "ANOTHER DAY, ANOTHER SAFE BEACH";
+	}
+	else {
+		header = "SHARK ATTACK!";
+	}
+	let text = document.createTextNode(header);
+
+	popupHeader.appendChild(text);
+	popupBox.appendChild(popupHeader);
+	popupBgDiv.appendChild(popupBox);
+	document.getElementsByClassName("one-page")[0].appendChild(popupBgDiv);
+
+	console.log("Hello");
+
+}
+
+function shareButton() {
+	let button = document.getElementById("startButton");
+	button.textContent = "SHARE";
+}
+
 /**
  * Function that triggers the game winning set of actions.
  */
 function gameWin() {
 
+	window.win = true;
 	document.getElementById("statusLine").innerHTML = "The beach is safe!";
 
     // Stop Timer
 	let time = stopTimer();
 
-	sendStats("/gamestats", time[0]*60 + time[1], true);
+	shareButton();
+
+	sendStats("/gamestats", time[0]*60 + time[1], window.win);
+
+	let popupDelay = 1000 // 1second
+
+	setTimeout(endGamePopup, popupDelay);
 }
 
 /**
- * Function that triggers the game over set of actions for when 
- * the timer runs out or when a shark is clicked.
+ * Function that triggers the game over set of actions for 
+ * when a shark is clicked.
  */
 function gameOver() {
+
+	window.win = false;
+
     revealBoard();
 	let time = stopTimer();
 
-	sendStats("/gamestats", time[0]*60 + time[1], false);
+	shareButton();
+
+	sendStats("/gamestats", time[0]*60 + time[1], window.win);
+
+	let popupDelay = 1000 // 1second
+
+	setTimeout(endGamePopup, popupDelay);
 }
 
 /**
