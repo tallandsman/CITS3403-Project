@@ -56,7 +56,7 @@ vertically. */
 
 /* Makes the selected element visible */
 .show_popup {
-    visibility: visible;
+    visibility: visible!important;
 }
 
 /* Styling for the horizontal rectangle tag */
@@ -208,6 +208,70 @@ to fill the space of the div without expanding it. */
 .cell-img {
     width: 100%;
     height: 100%;
+}
+
+/* -------------------------------------------------------------------------------------- */
+
+/* GAME RESULTS POP-UP SPECIFIC STYLING */
+
+/* Centers elements in the center of the page and removes it from document flow */
+.pop-up {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Styling for the opaque background while pop-up is active */
+#popupBgDiv {
+	background-color: #ffffff70;
+	width: 100%;
+	height: 100%;
+}
+
+/* Styling for the pop-up box itself */
+#popupBox {
+	background-color: #ffffff;
+	width: 50vw;
+	height: 50vh;
+	border-radius: 2vw;
+}
+
+/* Styling for the pop-up box's header */
+#popupHeader {
+	margin: 5%;
+	text-align: center;
+}
+
+/* Styling for all sections within the pop-up box */
+.popupSection {
+	margin: 5%;
+	text-align: left;
+}
+
+/* Header styling of each section */
+.popupSection h3 {
+	font-size: 3vh;
+}
+
+/* Positions the close button in the bottom right corner of the pop-up */
+#btnDiv {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+
+/* Styling for the buttons on the pop-up */
+.popupBtn {
+	background-color: #d6d6d6;
+	border: 0.1vw solid #c4c4c4;
+	border-radius: 0.5vw;
+}
+
+/* Hover styling for the buttons on the pop-up */
+.popupBtn:hover {
+	background-color: #b1b1b1;
+	border: 0.1vw solid #a3a3a3;
 }
 
 /* -------------------------------------------------------------------------------------- */
@@ -409,67 +473,6 @@ and change style display toggled block and none */
     border-color: #888;
     background-color:#ddd;
     text-decoration: none;
-}
-
-.pop-up {
-	
-	position: absolute;
-
-	left: 50%;
-	top: 50%;
-
-    transform: translate(-50%, -50%);
-}
-
-#popupBgDiv {
-	background-color: #ffffff70;
-	width: 100%;
-	height: 100%;
-}
-
-#popupBox {
-	background-color: #ffffff;
-	width: 50vw;
-	height: 50vh;
-
-	border-radius: 2vw;
-}
-
-#popupHeader {
-	margin: 5%;
-	text-align: center;
-}
-
-#btnDiv {
-	position: absolute;
-	bottom: 0;
-}
-
-.popupSectionHeader {
-	text-align: left;
-}
-
-.popupSection {
-	margin: 5%;
-}
-
-.popupSection p {
-	font-size: 2vh;
-}
-
-.popupSection h3 {
-	font-size: 3vh;
-}
-
-.popupBtn {
-	background-color: #d6d6d6;
-	border: 0.1vw solid #c4c4c4;
-	border-radius: 0.5vw;
-}
-
-.popupBtn:hover {
-	background-color: #b1b1b1;
-	border: 0.1vw solid #a3a3a3;
 }
 
 /* Statistics Page CSS */

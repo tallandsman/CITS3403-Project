@@ -401,11 +401,11 @@ function endGamePopup(time, win) {
 	// Header for the statistics section
 	let statHeader = document.createElement("h3");
 	statHeader.id = "statHeader";
-	statHeader.classList.add("popupSectionHeader");
 	statHeader.innerText = "Statistics";
 
 	// Body for the statistics section
 	let statBody = document.createElement("p");
+	statBody.classList.add("responsive-font");
 	statBody.id = "statBody";
 
 	// Extracts minutes and seconds from the time parameter passed.
@@ -453,7 +453,6 @@ function endGamePopup(time, win) {
 	// Header for the share section
 	let shareHeader = document.createElement("h3");
 	shareHeader.id = "shareHeader";
-	shareHeader.classList.add("popupSectionHeader");
 	shareHeader.innerText = "Share";
 
 	// Button to share the game results to the clipboard.
