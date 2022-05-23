@@ -62,26 +62,5 @@ class userModel(unittest.TestCase):
         sharksLocations = '{1},{2},{3},{4},{5},{6},{7},{8},{9},{10}'
 
 
-
-
-
-
 if __name__ == '__main__':
     unittest.main()
-
-
-
-
-
-
-# def test_user():
-#     user = User(id='111', username='test', email='test@test.com', password='1234', role='player', registerDate=datetime.today)
-#     # user = User('111', 'test', 'test@test.com', '1234', 'player', datetime.today)
-
-#     assert user.username == 'test'
-#     assert user.id='111'
-#     assert user.email == 'test@test.com'
-#     assert user.password_hash != '1234'
-#     assert user.role == 'player'
-#     assert user.registerDate == datetime.today
-
