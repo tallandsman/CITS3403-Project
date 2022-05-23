@@ -14,3 +14,6 @@ function openStat(event, tabName) {
     event.currentTarget.className += " active";
 }
 
+function anonymousAlert(){
+    alert("Statistics are only available for registered users");
+}

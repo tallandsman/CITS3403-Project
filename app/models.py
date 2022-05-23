@@ -1,7 +1,10 @@
 from app import db, login
-from datetime import datetime
+from datetime import datetime, timedelta
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+
+import base64
+import os
 
 # table to store users details
 class User(UserMixin, db.Model):
@@ -11,17 +14,42 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     role = db.Column(db.String(64), default='player') # either player or admin
     registerDate = db.Column(db.DateTime, default=datetime.today)
+    # token authentication to be used with token API
+    token = db.Column(db.String(32), index=True, unique=True)
+    token_expiration = db.Column(db.DateTime)
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
     
-    # generates a password hash - the original password isn't stored in the table
+    # generates a password hash - the original password isn't stored in the db
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
     # verifies password
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+    # generates token and store it in the db
+    def get_token(self, expires_in=3600):
+        now = datetime.utcnow()
+        if self.token and self.token_expiration > now + timedelta(seconds=60):
+            return self.token
+        self.token = base64.b64encode(os.urandom(24)).decode('utf-8')
+        self.token_expiration = now + timedelta(seconds=expires_in)
+        db.session.add(self)
+        return self.token
+    
+    # revokes a user's toekn - used in the token API
+    def revoke_token(self):
+        self.token_expiration = datetime.utcnow() - timedelta(seconds=1)
+    
+    # checks if the user's token is valid
+    @staticmethod
+    def check_token(token):
+        user = User.query.filter_by(token=token).first()
+        if user is None or user.token_expiration < datetime.utcnow():
+            return None
+        return user
 
 # table to store game statistics
 class Game_Statistics(db.Model):
