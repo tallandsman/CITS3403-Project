@@ -1,4 +1,4 @@
-// statistics table tab
+// statistics table tab (Personal, Global)
 
 function openStat(event, tabName) {
     var i, tabcontent, tablinks;
