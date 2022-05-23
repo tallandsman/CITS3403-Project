@@ -1,0 +1,825 @@
+* commit 2649a29f2901a45f822028526482a52e1223f653 (HEAD -> readme, origin/readme)
+| Author: jordantgiang <jordantgiang@gmail.com>
+| Date:   Mon May 23 08:24:26 2022 +0800
+| 
+|     re-opening game result pop-up
+|   
+*   commit da349e1aa0647e885e753e9f526ecfc1563ba299 (origin/main, origin/HEAD, main)
+|\  Merge: 363dc81 ba13fb3
+| | Author: jordantgiang <65347140+jordantgiang@users.noreply.github.com>
+| | Date:   Mon May 23 08:12:00 2022 +0800
+| | 
+| |     Merge pull request #28 from tallandsman/backend-logout-authentication
+| |     
+| |     Backend APIs & token authentication implemented
+| | 
+| * commit ba13fb3c1517836d189196ba9793bae405531b0a (origin/backend-logout-authentication)
+| | Author: Tal Landsman <tallandsman00@gmail.com>
+| | Date:   Sun May 22 21:09:07 2022 +0800
+| | 
+| |     Comments added
+| | 
+| * commit a660ebecf8c99e59a0753fd87333ddbf408f8b14
+| | Author: Tal Landsman <tallandsman00@gmail.com>
+| | Date:   Sun May 22 21:08:57 2022 +0800
+| | 
+| |     Token generation and authentication added
+| | 
+| * commit fa0b3f4871d57441fbeacd1ef25e8f9405e7cd5d
+| | Author: Tal Landsman <tallandsman00@gmail.com>
+| | Date:   Sun May 22 21:08:14 2022 +0800
+| | 
+| |     Routes seperated into controllers and API
+| | 
+| * commit 4dec632916ba10ff65cbafba9a3f06b100958e2e
+| | Author: Tal Landsman <tallandsman00@gmail.com>
+| | Date:   Sun May 22 21:06:55 2022 +0800
+| | 
+| |     Comments added
+| | 
+| * commit 8d0ff398fead8b59d882986e81f0d88b0b38bc90
+| | Author: Tal Landsman <tallandsman00@gmail.com>
+| | Date:   Sun May 22 18:40:44 2022 +0800
+| | 
+| |     Admin permissions added
+| |   
+| *   commit 1774919a0d948af560cc0a165fc295f66c3876d6
+| |\  Merge: 7bdb5aa c811cc7
+| | | Author: Tal Landsman <tallandsman00@gmail.com>
+| | | Date:   Sun May 22 18:30:41 2022 +0800
+| | | 
+| | |     Merge branch 'main' into backend-logout-authentication
+| | |   
+| * |   commit 7bdb5aa9e4f08b2617f433a51ace5370ee97f3f6
+| |\ \  Merge: dd23017 ac9ce0b
+| | | | Author: Tal Landsman <tallandsman00@gmail.com>
+| | | | Date:   Sun May 22 13:52:11 2022 +0800
+| | | | 
+| | | |     Merge branch 'main' into backend-logout-authentication
+| | | |   
+| * | |   commit dd23017a1c4e17a7c5a051b4a1ff2dff1a36d3ec
+| |\ \ \  Merge: 58187b5 606b5b5
+| | | | | Author: Tal Landsman <tallandsman00@gmail.com>
+| | | | | Date:   Sun May 22 13:36:03 2022 +0800
+| | | | | 
+| | | | |     Merge branch 'main' into backend-logout-authentication
+| | | | |   
+* | | | |   commit 363dc81d6469d92b81d8b152268e5d1599bd2468 (origin/ali_new)
+|\ \ \ \ \  Merge: c811cc7 202aa76
+| |_|_|_|/  Author: Alison0816 <86652293+Alison0816@users.noreply.github.com>
+|/| | | |   Date:   Sun May 22 21:22:29 2022 +0800
+| | | | |   
+| | | | |       Merge pull request #27 from tallandsman/readme
+| | | | |       
+| | | | |       first draft
+| | | | | 
+| * | | | commit 202aa761c65193a57fc4b3a39ea204f59fd832e6
+| | | | | Author: jordantgiang <jordantgiang@gmail.com>
+| | | | | Date:   Sun May 22 19:04:10 2022 +0800
+| | | | | 
+| | | | |     first draft
+| | | | |   
+* | | | |   commit c811cc7c5b42063802debbab8147e5f1a96147f9
+|\ \ \ \ \  Merge: 62fedd7 b56007d
+| | | | | | Author: tallandsman <69620630+tallandsman@users.noreply.github.com>
+| | | | | | Date:   Sun May 22 18:28:49 2022 +0800
+| | | | | | 
+| | | | | |     Merge pull request #26 from tallandsman/game_styling
+| | | | | |     
+| | | | | |     Game styling
+| | | | | | 
+| * | | | | commit b56007dd4d3f89b796c44fc125fb72fd2310dc1b (origin/game_styling, game_styling)
+| | | | | | Author: jordantgiang <jordantgiang@gmail.com>
+| | | | | | Date:   Sun May 22 18:23:00 2022 +0800
+| | | | | | 
+| | | | | |     full CSS clean (Game Board and home page)
+| | | | | |   
+| * | | | |   commit 972cd16f989c170029953f3cd0ae7dc1aad91bb1
+| |\ \ \ \ \  Merge: 25a003c 6ff499f
+| | |/ / / /  Author: jordantgiang <jordantgiang@gmail.com>
+| | | | | |   Date:   Sun May 22 18:10:47 2022 +0800
+| | | | | |   
+| | | | | |       Merge branch 'main' into game_styling
+| | | | | |   
+* | | | | |   commit 62fedd7b311ae99fef6beeafa9c1f34c0c883992
+|\ \ \ \ \ \  Merge: 6ff499f 25a003c
+| |/ / / / /  Author: tallandsman <69620630+tallandsman@users.noreply.github.com>
+| | / / / /   Date:   Sun May 22 18:17:59 2022 +0800
+| |/ / / /    
+|/| | | |         Merge pull request #25 from tallandsman/game_styling
+| | | | |         
+| | | | |         Added comments to css file and How to Play view content change
+| | | | | 
+| * | | | commit 25a003c229004930e2addd3f19e3550581197e5d
+| | | | | Author: jordantgiang <jordantgiang@gmail.com>
+| | | | | Date:   Sun May 22 18:07:48 2022 +0800
+| | | | | 
+| | | | |     CSS tidy up (not complete)
+| | | | | 
+| * | | | commit 7e165cdecfe24d8c7514744bf49def94c0e1d747
+| | | | | Author: jordantgiang <jordantgiang@gmail.com>
+| | | | | Date:   Sun May 22 17:52:07 2022 +0800
+| | | | | 
+| | | | |     how-to-play rewording + partial css cleanup
+| | | | | 
+| * | | | commit 6c3077d45747896b03c11a987450c93c41fd2288
+| | |_|/  Author: jordantgiang <jordantgiang@gmail.com>
+| |/| |   Date:   Sun May 22 17:06:18 2022 +0800
+| | | |   
+| | | |       game.js cleaned and commented
+| | | |   
+* | | |   commit 6ff499f93d0528ff4d504efc310268babf42e417
+|\ \ \ \  Merge: ac9ce0b 33186e1
+| |/ / /  Author: Alison0816 <86652293+Alison0816@users.noreply.github.com>
+|/| | |   Date:   Sun May 22 17:26:02 2022 +0800
+| | | |   
+| | | |       Merge pull request #24 from tallandsman/ali_new
+| | | |       
+| | | |       Responsive(nav, stats)
+| | | | 
+| * | | commit 33186e1af92a7fd64402b76947282f35619a7425
+| | | | Author: Alison0816 <22835304@student.uwa.edu.au>
+| | | | Date:   Sun May 22 15:42:30 2022 +0800
+| | | | 
+| | | |     Responsive(nav,stats)
+| | | | 
+| * | | commit 7162f3ae95e56a2a0233c22d15ddb08508062c6d
+|/ / /  Author: Alison0816 <22835304@student.uwa.edu.au>
+| | |   Date:   Sun May 22 14:45:51 2022 +0800
+| | |   
+| | |       admin button
+| | |   
+* | |   commit ac9ce0bdaa91bf457df08094395d3f52f9472e8a
+|\ \ \  Merge: 42410d9 afc8720
+| | | | Author: Alison0816 <86652293+Alison0816@users.noreply.github.com>
+| | | | Date:   Sun May 22 13:49:52 2022 +0800
+| | | | 
+| | | |     Merge pull request #23 from tallandsman/game_styling
+| | | |     
+| | | |     Game styling
+| | | |   
+| * | |   commit afc8720c14ad636eaaacc8676d2fffd393b02746
+| |\ \ \  Merge: 79f9842 42410d9
+| |/ / /  Author: jordantgiang <jordantgiang@gmail.com>
+|/| | |   Date:   Sun May 22 13:37:57 2022 +0800
+| | | |   
+| | | |       Merge branch 'main' into game_styling
+| | | |   
+* | | |   commit 42410d90c4393a228d0bc5d390d28ad5c3546e75
+|\ \ \ \  Merge: 606b5b5 58187b5
+| | |/ /  Author: Alison0816 <86652293+Alison0816@users.noreply.github.com>
+| |/| /   Date:   Sun May 22 13:35:53 2022 +0800
+| |_|/    
+|/| |         Merge pull request #22 from tallandsman/backend-logout-authentication
+| | |         
+| | |         Sign in/Sign up buttons visibility changed
+| | | 
+| * | commit 58187b57f6ead0df6896ea2835be8fc859ec2356
+| | | Author: Tal Landsman <tallandsman00@gmail.com>
+| | | Date:   Sun May 22 13:34:33 2022 +0800
+| | | 
+| | |     Sign in/Sign up buttons visibility changed
+| | |   
+| | *   commit 79f9842318ef3619b3be31b6c1b26a2d647c005e
+| | |\  Merge: 473eadc 606b5b5
+| |_|/  Author: jordantgiang <jordantgiang@gmail.com>
+|/| |   Date:   Sun May 22 13:36:24 2022 +0800
+| | |   
+| | |       Merge branch 'main' into game_styling
+| | |   
+* | |   commit 606b5b53955482a50cc9412102c00ca072c85bce
+|\ \ \  Merge: 3b7a257 b138984
+| |/ /  Author: tallandsman <69620630+tallandsman@users.noreply.github.com>
+|/| |   Date:   Sun May 22 13:33:11 2022 +0800
+| | |   
+| | |       Merge pull request #21 from tallandsman/test2
+| | |       
+| | |       stats page scroll fixed
+| | | 
+| * | commit b1389847f63d3f55478b805850a1bfefe3667460 (origin/test2)
+|/ /  Author: Alison0816 <22835304@student.uwa.edu.au>
+| |   Date:   Sun May 22 13:15:54 2022 +0800
+| |   
+| |       stats page scroll
+| |       stats css merged into home.css
+| |       fixed popup js
+| |   
+* |   commit 3b7a2571d1dbeab66d91deec02dc5b71f04dd458
+|\ \  Merge: 8b230e5 ef68391
+| | | Author: Alison0816 <86652293+Alison0816@users.noreply.github.com>
+| | | Date:   Sun May 22 12:44:04 2022 +0800
+| | | 
+| | |     Merge pull request #20 from tallandsman/game_styling
+| | |     
+| | |     Game styling
+| | | 
+| | * commit 473eadcf5523c9f32e7c6d237727d3ecbc648d0a
+| |/  Author: jordantgiang <jordantgiang@gmail.com>
+| |   Date:   Sun May 22 13:30:01 2022 +0800
+| |   
+| |       phone responsive
+| |   
+| *   commit ef68391527296c48f83c1768f88ad95fcd53ba14
+| |\  Merge: b156ff3 8b230e5
+| |/  Author: jordantgiang <jordantgiang@gmail.com>
+|/|   Date:   Sun May 22 12:40:34 2022 +0800
+| |   
+| |       Merge branch 'main' into game_styling
+| |   
+* |   commit 8b230e5cb4a3cc12b6fe5253b6e6332d790efead
+|\ \  Merge: 13e890f 2e53424
+| | | Author: tallandsman <69620630+tallandsman@users.noreply.github.com>
+| | | Date:   Sun May 22 12:36:40 2022 +0800
+| | | 
+| | |     Merge pull request #19 from tallandsman/backend-stats-table
+| | |     
+| | |     Backend Admin View & Jinja formatting for HTML
+| | | 
+| * | commit 2e534244948d3df8b74411f0d33c59b9493de658 (origin/backend-stats-table)
+| | | Author: Tal Landsman <tallandsman00@gmail.com>
+| | | Date:   Sun May 22 12:30:59 2022 +0800
+| | | 
+| | |     HTML Pages changed to jinja formating
+| | | 
+| * | commit d1ede37e945058251393d10004f9a33196b89867
+| | | Author: Tal Landsman <tallandsman00@gmail.com>
+| | | Date:   Sun May 22 12:30:21 2022 +0800
+| | | 
+| | |     Admin functionality added
+| | |   
+* | |   commit 13e890f02bf1d5ca1e26c0f70a8f1be30a638832
+|\ \ \  Merge: 6c65674 1462fa9
+| |/ /  Author: Alison0816 <86652293+Alison0816@users.noreply.github.com>
+| | |   Date:   Sat May 21 23:15:42 2022 +0800
+| | |   
+| | |       Merge pull request #18 from tallandsman/backend-stats-table
+| | |       
+| | |       Backend stats table implemented
+| | | 
+| * | commit 1462fa952dac69f865380fa3be05cf7534b4ca2e
+| | | Author: Tal Landsman <tallandsman00@gmail.com>
+| | | Date:   Sat May 21 23:12:57 2022 +0800
+| | | 
+| | |     Game stats query changes to see wone games first
+| | | 
+| * | commit eb49fb95e529572815a0888bae6037c1a3871d43
+| | | Author: Tal Landsman <tallandsman00@gmail.com>
+| | | Date:   Sat May 21 23:12:28 2022 +0800
+| | | 
+| | |     Friends table deleted
+| | | 
+| * | commit f07fd0001233f9bd4a0e4e0bf4012a2b05941551
+| | | Author: Tal Landsman <tallandsman00@gmail.com>
+| | | Date:   Sat May 21 22:05:11 2022 +0800
+| | | 
+| | |     Backend stats table functionality added
+| | | 
+| * | commit c2bbd807750dfbe5e496c50d9cb3cd04dde5dae5
+| | | Author: Tal Landsman <tallandsman00@gmail.com>
+| | | Date:   Sat May 21 22:04:32 2022 +0800
+| | | 
+| | |     Comments added
+| | | 
+| * | commit 231447c3d2d981ce9e3b1d1479c1b0b3f23aec65
+| | | Author: Tal Landsman <tallandsman00@gmail.com>
+| | | Date:   Sat May 21 22:03:48 2022 +0800
+| | | 
+| | |     Error messages added to sign in and sign up pages
+| | | 
+| * | commit 936e53fdb48e26383d7bd86d311767aac9893694
+| | | Author: Tal Landsman <tallandsman00@gmail.com>
+| | | Date:   Sat May 21 09:03:57 2022 +0800
+| | | 
+| | |     jQuery CDN and routing changed
+| | | 
+| * | commit 828fefa8e952b117449959110adabc1b3e638b9d
+|/ /  Author: Tal Landsman <tallandsman00@gmail.com>
+| |   Date:   Sat May 21 08:58:18 2022 +0800
+| |   
+| |       date column in puzzle table change
+| | 
+| * commit b156ff359401d6f2a57aea7ad0b609c2c25123ba
+| | Author: jordantgiang <jordantgiang@gmail.com>
+| | Date:   Sun May 22 12:34:25 2022 +0800
+| | 
+| |     copy to clipboard
+| | 
+| * commit ce681f5710a0532810c37343877a389e352840f7
+| | Author: jordantgiang <jordantgiang@gmail.com>
+| | Date:   Sun May 22 11:17:05 2022 +0800
+| | 
+| |     completion popup started
+| | 
+| * commit fe0f917776cfc4cf5e3d798328192684c56215cb
+|/  Author: jordantgiang <jordantgiang@gmail.com>
+|   Date:   Sat May 21 17:32:36 2022 +0800
+|   
+|       Elements Centered for Laptop
+|   
+*   commit 6c65674ffe6c634d2d69cadc7c83f999212d9392
+|\  Merge: d1a7cd0 3a5ffd0
+| | Author: jordantgiang <65347140+jordantgiang@users.noreply.github.com>
+| | Date:   Fri May 20 15:06:52 2022 +0800
+| | 
+| |     Merge pull request #17 from tallandsman/backend-game-stats
+| |     
+| |     Backend puzzle generation
+| | 
+| * commit 3a5ffd04d6972437ae954d1353eb6db5c9c2cc47 (origin/backend-game-stats)
+| | Author: Tal Landsman <tallandsman00@gmail.com>
+| | Date:   Fri May 20 13:33:41 2022 +0800
+| | 
+| |     puzzle is now generated via get req to backend
+| |   
+| *   commit 56605b3c7222796ca6e8e23c4c13b2875c24ec49
+| |\  Merge: d32ed25 9682634
+| | | Author: Tal Landsman <tallandsman00@gmail.com>
+| | | Date:   Fri May 20 11:44:09 2022 +0800
+| | | 
+| | |     Merge branch 'main' into backend-game-stats
+| | | 
+| * | commit d32ed25a9452316fe5941925bee0508d95062842
+| | | Author: Tal Landsman <tallandsman00@gmail.com>
+| | | Date:   Fri May 20 11:42:58 2022 +0800
+| | | 
+| | |     puzzle generation from backend setup
+| | |   
+* | |   commit d1a7cd03172311348c8afa992d2b6653da491b10
+|\ \ \  Merge: 9682634 1aac3bb
+| |_|/  Author: jordantgiang <65347140+jordantgiang@users.noreply.github.com>
+|/| |   Date:   Fri May 20 13:09:59 2022 +0800
+| | |   
+| | |       Merge pull request #16 from tallandsman/one_page
+| | |       
+| | |       Few changes
+| | |   
+| * |   commit 1aac3bb33e326c6c574f0388e4c50aa624d45368 (origin/one_page)
+| |\ \  Merge: f88eaf0 d4a6d07
+| | | | Author: Alison0816 <22835304@student.uwa.edu.au>
+| | | | Date:   Fri May 20 13:02:02 2022 +0800
+| | | | 
+| | | |     Merge branch 'one_page' of https://github.com/tallandsman/CITS3403-Project into one_page
+| | | | 
+| | * | commit d4a6d0738634e88f2203102cdfaad42d7e0e1b02
+| | | | Author: Alison0816 <22835304@student.uwa.edu.au>
+| | | | Date:   Fri May 20 12:40:16 2022 +0800
+| | | | 
+| | | |     stats page with 3 tabs
+| | | | 
+| | * | commit dbdb3623873b53b7aacbecc94088bc4e52dfc001
+| | | | Author: Alison0816 <22835304@student.uwa.edu.au>
+| | | | Date:   Wed May 18 15:32:04 2022 +0800
+| | | | 
+| | | |     Adding sing-out buttom
+| | | | 
+| | * | commit 7030ab0bf9459f8e22ab1d084dbacbedda472e3a
+| | | | Author: Alison0816 <22835304@student.uwa.edu.au>
+| | | | Date:   Wed May 18 14:27:45 2022 +0800
+| | | | 
+| | | |     change stats.html
+| | | |     previous page didn't work nav button
+| | | | 
+| | * | commit 7806685405f898eb8d8c9769306188d9628acf50
+| | | | Author: Alison0816 <22835304@student.uwa.edu.au>
+| | | | Date:   Wed May 18 14:21:02 2022 +0800
+| | | | 
+| | | |     sign in/up page remove game.js and remove body inline styles
+| | | | 
+| | * | commit 6b74619008fc746249a2c3051dfd50cb386030d6
+| | | | Author: Alison0816 <22835304@student.uwa.edu.au>
+| | | | Date:   Wed May 18 14:06:49 2022 +0800
+| | | | 
+| | | |     remove body inline style
+| | | |     changed size of popup so it can be one page without scroll
+| | | | 
+| * | | commit f88eaf083749e103b46c0bfc230ef29d4b795296
+| | | | Author: Alison0816 <22835304@student.uwa.edu.au>
+| | | | Date:   Fri May 20 12:40:16 2022 +0800
+| | | | 
+| | | |     stats page with 3 tabs
+| | | | 
+| * | | commit aa68a270f3bf2b14b0a94ecc7e1cd8910cf21f3e
+| | | | Author: Alison0816 <22835304@student.uwa.edu.au>
+| | | | Date:   Wed May 18 15:32:04 2022 +0800
+| | | | 
+| | | |     Adding sing-out buttom
+| | | | 
+| * | | commit 11979409f3c7dd1a073b77ca59a2c75ac7980ba0
+| | | | Author: Alison0816 <22835304@student.uwa.edu.au>
+| | | | Date:   Wed May 18 14:21:02 2022 +0800
+| | | | 
+| | | |     sign in/up page remove game.js and remove body inline styles
+| | | | 
+| * | | commit 515d44d8205d83f776d59194fa8cef873f316583
+|/ / /  Author: Alison0816 <22835304@student.uwa.edu.au>
+| | |   Date:   Wed May 18 14:06:49 2022 +0800
+| | |   
+| | |       remove body inline style
+| | |       changed size of popup so it can be one page without scroll
+| | |   
+* | |   commit 9682634dbc2dd9e072f5e0c21a24a4205ee51435
+|\ \ \  Merge: dd90281 7613243
+| | | | Author: tallandsman <69620630+tallandsman@users.noreply.github.com>
+| | | | Date:   Fri May 20 11:42:10 2022 +0800
+| | | | 
+| | | |     Merge pull request #15 from tallandsman/Game_to_backend
+| | | |     
+| | | |     Game to backend
+| | | | 
+| * | | commit 7613243f4c20466a87cd5b562dce77a7f609b548 (origin/Game_to_backend, Game_to_backend)
+| | | | Author: jordantgiang <jordantgiang@gmail.com>
+| | | | Date:   Fri May 20 11:16:00 2022 +0800
+| | | | 
+| | | |     added GET request for sharks
+| | | |   
+| * | |   commit 18e92ad38cc676c27cddd07e7eec6aa1be2f7a07
+| |\ \ \  Merge: 2b22e88 dd90281
+| |/ / /  Author: jordantgiang <jordantgiang@gmail.com>
+|/| | |   Date:   Fri May 20 09:46:46 2022 +0800
+| | | |   
+| | | |       Merge branch 'main' into Game_to_backend
+| | | |   
+* | | |   commit dd90281589a784d2a4d4c3744fde060e09b9e24e
+|\ \ \ \  Merge: 0e925d5 8941ec5
+| | |_|/  Author: jordantgiang <65347140+jordantgiang@users.noreply.github.com>
+| |/| |   Date:   Fri May 20 09:44:23 2022 +0800
+| | | |   
+| | | |       Merge pull request #14 from tallandsman/backend-game-stats
+| | | |       
+| | | |       jquery CDN changed
+| | | | 
+| * | | commit 8941ec5834fc31695d33b52e122193f3a1029535
+| | | | Author: Tal Landsman <tallandsman00@gmail.com>
+| | | | Date:   Fri May 20 09:42:51 2022 +0800
+| | | | 
+| | | |     jquery CDN changed
+| | | |   
+| | * |   commit 2b22e88203bd84ca13254e42b8105984a36c870e
+| | |\ \  Merge: 9be93c2 0e925d5
+| |_|/ /  Author: jordantgiang <jordantgiang@gmail.com>
+|/| | |   Date:   Fri May 20 09:31:49 2022 +0800
+| | | |   
+| | | |       Merge branch 'main' into Game_to_backend
+| | | |   
+* | | |   commit 0e925d57c505f6607bb8b59a8ace827ebf628343
+|\ \ \ \  Merge: 296282f 3333849
+| |/ / /  Author: jordantgiang <65347140+jordantgiang@users.noreply.github.com>
+| | | |   Date:   Fri May 20 09:31:00 2022 +0800
+| | | |   
+| | | |       Merge pull request #13 from tallandsman/backend-game-stats
+| | | |       
+| | | |       game stats api setup
+| | | | 
+| * | | commit 33338492960c8114e09df352ff62793255214703
+|/ / /  Author: Tal Landsman <tallandsman00@gmail.com>
+| | |   Date:   Fri May 20 09:29:07 2022 +0800
+| | |   
+| | |       game stats api setup
+| | |   
+* | |   commit 296282f8f2118be62553091623891ef2c6835819
+|\ \ \  Merge: 6fc9a53 6ce92d3
+| | | | Author: tallandsman <69620630+tallandsman@users.noreply.github.com>
+| | | | Date:   Fri May 20 09:18:49 2022 +0800
+| | | | 
+| | | |     Merge pull request #12 from tallandsman/Game_to_backend
+| | | |     
+| | | |     AJAX gamestat POST
+| | | |   
+* | | |   commit 6fc9a53154360e51885d5a38c03e558bdea73cb7
+|\ \ \ \  Merge: 6fda1a7 deb20ed
+| | | | | Author: tallandsman <69620630+tallandsman@users.noreply.github.com>
+| | | | | Date:   Thu May 19 16:18:21 2022 +0800
+| | | | | 
+| | | | |     Merge pull request #11 from tallandsman/backend-flask
+| | | | |     
+| | | | |     Backend flask & databases set up
+| | | | | 
+| * | | | commit deb20ed700f11b17cc4cef9f7a44ad98e9fe7317 (origin/backend-flask)
+| | | | | Author: Tal Landsman <tallandsman00@gmail.com>
+| | | | | Date:   Wed May 18 22:35:25 2022 +0800
+| | | | | 
+| | | | |     requirements file added
+| | | | | 
+| * | | | commit c9eda2b9af8f7d1756db574d813b50729955d61a
+| | | | | Author: Tal Landsman <tallandsman00@gmail.com>
+| | | | | Date:   Wed May 18 22:26:20 2022 +0800
+| | | | | 
+| | | | |     Routes and User db fixed
+| | | | |   
+| * | | |   commit 69e39d2a43b2945ba2c43ad947b7cca70e8e920d
+| |\ \ \ \  Merge: 9536398 6fda1a7
+| |/ / / /  Author: Tal Landsman <tallandsman00@gmail.com>
+|/| | | |   Date:   Wed May 18 12:58:29 2022 +0800
+| | | | |   
+| | | | |       Merge branch 'main' into backend-flask
+| | | | | 
+* | | | | commit 6fda1a76fd08f56a4971f215496d80bcb4da9cbf
+| |_|_|/  Author: tallandsman <69620630+tallandsman@users.noreply.github.com>
+|/| | |   Date:   Wed May 18 12:50:05 2022 +0800
+| | | |   
+| | | |       .DS_Store deleted
+| | | |   
+* | | |   commit de246e3df375162cdcb3d976bdbb4bd2607e33f3
+|\ \ \ \  Merge: 52067cf b8d66f5
+| | | | | Author: Alison0816 <22835304@student.uwa.edu.au>
+| | | | | Date:   Wed May 18 12:47:39 2022 +0800
+| | | | | 
+| | | | |     Merge branch 'navigation' into main
+| | | | | 
+| * | | | commit b8d66f5c08fe61ecf9cc4df5a81f14e8e9694dbd (origin/navigation)
+| | | | | Author: Alison0816 <22835304@student.uwa.edu.au>
+| | | | | Date:   Tue May 17 16:14:05 2022 +0800
+| | | | | 
+| | | | |     update path for a tags
+| | | | |     update function names
+| | | | |     adding popup html code to signIn/Up pages
+| | | | | 
+| * | | | commit b832b08c1258d540ab05e100b31cec672d434b60
+| | | | | Author: Alison0816 <22835304@student.uwa.edu.au>
+| | | | | Date:   Tue May 17 15:54:46 2022 +0800
+| | | | | 
+| | | | |     js name changed
+| | | | |   
+| * | | |   commit 3c6150cb687ea088628e2d70462c2dd6d264075d
+| |\ \ \ \  Merge: a0107b8 59610aa
+| | | | | | Author: Alison0816 <22835304@student.uwa.edu.au>
+| | | | | | Date:   Tue May 17 15:53:15 2022 +0800
+| | | | | | 
+| | | | | |     js name to nav_popup.js and fix js code to work
+| | | | | | 
+| | | * | | commit 9536398c6d77c2c7bcbd2a2de429a3b2e4999d18
+| | | | | | Author: Tal Landsman <tallandsman00@gmail.com>
+| | | | | | Date:   Wed May 18 12:57:32 2022 +0800
+| | | | | | 
+| | | | | |     Basic db implemented
+| | | | | |   
+| | | * | |   commit 161d2794d8227323cbfe635cafbfa29ed9a24563
+| | | |\ \ \  Merge: 6914351 82c137f
+| | | | | | | Author: Tal Landsman <tallandsman00@gmail.com>
+| | | | | | | Date:   Tue May 17 11:31:34 2022 +0800
+| | | | | | | 
+| | | | | | |     Merge branch 'main' into backend-flask
+| | | | | | |   
+| | | * | | |   commit 6914351a8821508231b969267dc17460be403cf9
+| | | |\ \ \ \  Merge: 5036125 483b380
+| | | | | | | | Author: Tal Landsman <tallandsman00@gmail.com>
+| | | | | | | | Date:   Tue May 17 11:30:53 2022 +0800
+| | | | | | | | 
+| | | | | | | |     Merge branch 'Login-Sign-Up-Pages' into backend-flask
+| | | | | | | |   
+| | | * | | | |   commit 5036125bcca4eb132d99fc32f164d2de53765f1f
+| | | |\ \ \ \ \  Merge: 63330fd d11178d
+| | | | | | | | | Author: Tal Landsman <tallandsman00@gmail.com>
+| | | | | | | | | Date:   Tue May 17 00:55:06 2022 +0800
+| | | | | | | | | 
+| | | | | | | | |     Merge branch 'main' into backend-flask
+| | | | | | | | | 
+| | | * | | | | | commit 63330fd5193bc47587122adeb9f7dcbc1955d00a
+| | | | | | | | | Author: Tal Landsman <tallandsman00@gmail.com>
+| | | | | | | | | Date:   Tue May 17 00:45:54 2022 +0800
+| | | | | | | | | 
+| | | | | | | | |     flask and data models set up
+| | | | | | | | | 
+| | | | | | | | * commit 9be93c29815a912418be2c55c2772a17749a5bee
+| | | | | | | |/  Author: jordantgiang <jordantgiang@gmail.com>
+| | | | | | | |   Date:   Fri May 20 09:30:23 2022 +0800
+| | | | | | | |   
+| | | | | | | |       getRequest for sharks
+| | | | | | | | 
+| | | | | | | * commit 6ce92d305ac277af5169a6c362da09b5960f1a9b
+| | | | | | | | Author: jordantgiang <jordantgiang@gmail.com>
+| | | | | | | | Date:   Fri May 20 09:17:58 2022 +0800
+| | | | | | | | 
+| | | | | | | |     httpRequest to jQuery
+| | | | | | | | 
+| | | | | | | * commit 5607aa19565a7898c481a0c5b74101bbb741254a
+| |_|_|_|_|_|/  Author: jordantgiang <jordantgiang@gmail.com>
+|/| | | | | |   Date:   Fri May 20 08:57:58 2022 +0800
+| | | | | | |   
+| | | | | | |       AJAX gamestat POST
+| | | | | | |   
+* | | | | | |   commit 52067cfae525bee9c8c93b007b7d1a82b63b0fc5
+|\ \ \ \ \ \ \  Merge: 59610aa a0107b8
+| |/ / / / / /  Author: tallandsman <69620630+tallandsman@users.noreply.github.com>
+| | / / / / /   Date:   Tue May 17 14:56:58 2022 +0800
+| |/ / / / /    
+|/| | | | |         Merge pull request #9 from tallandsman/navigation
+| | | | | |         
+| | | | | |         Navigation bar fixed
+| | | | | | 
+| * | | | | commit a0107b8651e036cd715001a46555f2a987ad2aec
+| | | | | | Author: Alison0816 <22835304@student.uwa.edu.au>
+| | | | | | Date:   Tue May 17 14:51:09 2022 +0800
+| | | | | | 
+| | | | | |     temp
+| | | | | | 
+| * | | | | commit 1fae68c83b36d4abbbf173607f6c5183f6d84804
+| | | | | | Author: Alison0816 <22835304@student.uwa.edu.au>
+| | | | | | Date:   Tue May 17 12:56:13 2022 +0800
+| | | | | | 
+| | | | | |     nav javascript
+| | | | | | 
+| * | | | | commit d221d0fcd9cf109cc048573e4a0d8f951027887d
+| | | | | | Author: Alison0816 <22835304@student.uwa.edu.au>
+| | | | | | Date:   Sat May 14 02:20:20 2022 +0800
+| | | | | | 
+| | | | | |     non-fixed navigation
+| | | | | |   
+* | | | | |   commit 59610aa7efab9fb1b58ca5d9775a915f3193f725
+|\ \ \ \ \ \  Merge: 839d4e4 d183c21
+| | | | | | | Author: Alison0816 <86652293+Alison0816@users.noreply.github.com>
+| | | | | | | Date:   Tue May 17 13:52:38 2022 +0800
+| | | | | | | 
+| | | | | | |     Merge pull request #8 from tallandsman/Timer
+| | | | | | |     
+| | | | | | |     looks good
+| | | | | | | 
+| * | | | | | commit d183c214dcf7143dc98701c74e871f90a7412558 (origin/Timer, Timer)
+| | | | | | | Author: jordantgiang <jordantgiang@gmail.com>
+| | | | | | | Date:   Tue May 17 13:46:54 2022 +0800
+| | | | | | | 
+| | | | | | |     Responsive HUD, gamestart buttons and timer
+| | | | | | |   
+| * | | | | |   commit 1c22ac20de71e3ad5419a5a7ee9b12781dee1541
+| |\ \ \ \ \ \  Merge: daf8138 839d4e4
+| |/ / / / / /  Author: jordantgiang <jordantgiang@gmail.com>
+|/| | | | | |   Date:   Tue May 17 11:44:40 2022 +0800
+| | | | | | |   
+| | | | | | |       Merge branch 'main' into Complete-Game
+| | | | | | |   
+* | | | | | |   commit 839d4e42712699e4e732bac216a12c725098344e
+|\ \ \ \ \ \ \  Merge: bdd4f88 175d0a9
+| | | | | | | | Author: Alison0816 <86652293+Alison0816@users.noreply.github.com>
+| | | | | | | | Date:   Tue May 17 11:40:55 2022 +0800
+| | | | | | | | 
+| | | | | | | |     Merge pull request #6 from tallandsman/homePage
+| | | | | | | |     
+| | | | | | | |     Updated Shark Image
+| | | | | | | | 
+| * | | | | | | commit 175d0a957e42b71f791de3f31893590a2e2e1742 (origin/homePage, homePage)
+| | | | | | | | Author: jordantgiang <jordantgiang@gmail.com>
+| | | | | | | | Date:   Fri May 13 23:47:58 2022 +0800
+| | | | | | | | 
+| | | | | | | |     Updated Shark Image
+| | | | | | | |   
+* | | | | | | |   commit bdd4f88176d37ddc60c74ac7b6aefc737cc0afc9
+|\ \ \ \ \ \ \ \  Merge: 82c137f 483b380
+| | |_|_|_|_|/ /  Author: Alison0816 <86652293+Alison0816@users.noreply.github.com>
+| |/| | | | | /   Date:   Tue May 17 11:39:47 2022 +0800
+| |_|_|_|_|_|/    
+|/| | | | | |         Merge pull request #7 from tallandsman/Login-Sign-Up-Pages
+| | | | | | |         
+| | | | | | |         Sign in & Sign up pages
+| | | | | | | 
+| * | | | | | commit 483b3803b66662bd0f17da6f4ea5b912b4a3e58e (origin/Login-Sign-Up-Pages)
+| | | | | | | Author: Tal Landsman <tallandsman00@gmail.com>
+| | | | | | | Date:   Tue May 17 11:12:06 2022 +0800
+| | | | | | | 
+| | | | | | |     linked to sign up page
+| | | | | | | 
+| * | | | | | commit 57916c6d09a7e1e24aae38f2423fb71a0e11194e
+| | | | | | | Author: Tal Landsman <tallandsman00@gmail.com>
+| | | | | | | Date:   Tue May 17 11:08:21 2022 +0800
+| | | | | | | 
+| | | | | | |     sign in and sign up pages style changed
+| | | | | | |   
+| * | | | | |   commit 60111c0555a67cb447bb9f151460804a2d57c89f
+| |\ \ \ \ \ \  Merge: 50707ba d11178d
+| | | |_|_|_|/  Author: Tal Landsman <tallandsman00@gmail.com>
+| | |/| | | |   Date:   Tue May 17 10:17:54 2022 +0800
+| | | | | | |   
+| | | | | | |       Merge branch 'main' into Login-Sign-Up-Pages
+| | | | | | |   
+| * | | | | |   commit 50707ba550c6acaa3f431a3e2c0313e7edf4e5e0
+| |\ \ \ \ \ \  Merge: aa55d9e 0993e9c
+| | | | | | | | Author: Tal Landsman <tallandsman00@gmail.com>
+| | | | | | | | Date:   Thu May 12 12:40:13 2022 +0800
+| | | | | | | | 
+| | | | | | | |     Merge branch 'main' into Login-Sign-Up-Pages
+| | | | | | | | 
+| * | | | | | | commit aa55d9eb083bf0773b07f1b0bc8aa9661f49a939
+| | | | | | | | Author: Tal Landsman <tallandsman00@gmail.com>
+| | | | | | | | Date:   Tue May 10 15:19:41 2022 +0800
+| | | | | | | | 
+| | | | | | | |     directory structure added
+| | | | | | | | 
+| * | | | | | | commit 541aad4db1ae386503b75c4b4cebc73bcbaced1b
+| | | | | | | | Author: Tal Landsman <tallandsman00@gmail.com>
+| | | | | | | | Date:   Tue May 10 12:33:35 2022 +0800
+| | | | | | | | 
+| | | | | | | |     login and signup html templates created
+| | | | | | | | 
+* | | | | | | | commit 82c137fe48fbf3ed097bef2b586dfcce2d175315
+| |_|/ / / / /  Author: Tal Landsman <tallandsman00@gmail.com>
+|/| | | | | |   Date:   Tue May 17 11:27:29 2022 +0800
+| | | | | | |   
+| | | | | | |       git ignore file added
+| | | | | | | 
+* | | | | | | commit d11178d4c48efe6599e4e811aec731e5d804a201
+| |_|_|_|_|/  Author: Tal Landsman <tallandsman00@gmail.com>
+|/| | | | |   Date:   Tue May 17 00:51:53 2022 +0800
+| | | | | |   
+| | | | | |       remove .DS_store file
+| | | | | | 
+| | | | * | commit daf8138410011a3244fd0867c316d1bf2154d692
+| | | | | | Author: jordantgiang <jordantgiang@gmail.com>
+| | | | | | Date:   Tue May 17 11:36:38 2022 +0800
+| | | | | | 
+| | | | | |     Starting Timer Implementation
+| | | | | | 
+| | | | * | commit ebbee93efcc3b54d1fb1945ef71039bb1050e78e
+| |_|_|/ /  Author: jordantgiang <jordantgiang@gmail.com>
+|/| | | |   Date:   Sun May 15 18:00:46 2022 +0800
+| | | | |   
+| | | | |       Win, Lose and Flag Mechanics
+| | | | |   
+* | | | |   commit b91ad8df516244011beddee56b34078eb94d077f
+|\ \ \ \ \  Merge: 5e324d8 ba75b7c
+| | |_|_|/  Author: tallandsman <69620630+tallandsman@users.noreply.github.com>
+| |/| | |   Date:   Fri May 13 23:56:58 2022 +0800
+| | | | |   
+| | | | |       Merge pull request #5 from tallandsman/navigation
+| | | | |       
+| | | | |       nav bar, stats & how to play pages merged into main
+| | | | | 
+| * | | | commit ba75b7ccf1c42666501ae7989b29d048bf62b38d
+|/ / / /  Author: Alison0816 <22835304@student.uwa.edu.au>
+| | | |   Date:   Fri May 13 23:12:07 2022 +0800
+| | | |   
+| | | |       nav, stats, how to play
+| | | |   
+* | | |   commit 5e324d83a2fedbd9867a57d7dfab30d60cc434e7
+|\ \ \ \  Merge: 0993e9c a2cbb66
+| |_|/ /  Author: Alison0816 <86652293+Alison0816@users.noreply.github.com>
+|/| | /   Date:   Thu May 12 14:17:52 2022 +0800
+| | |/    
+| |/|         Merge pull request #4 from tallandsman/homePage
+| | |         
+| | |         Home page
+| | |   
+| * |   commit a2cbb66123c094766474f5a17d8af37b484f9384
+| |\ \  Merge: a78f747 0993e9c
+| |/ /  Author: jordantgiang <jordantgiang@gmail.com>
+|/| |   Date:   Thu May 12 13:30:33 2022 +0800
+| | |   
+| | |       Merge branch 'main' into homePage
+| | | 
+* | | commit 0993e9c98d1789f5e5521e7760dd15c5f95c0feb
+| | | Author: Alison0816 <22835304@student.uwa.edu.au>
+| | | Date:   Wed May 11 16:30:40 2022 +0800
+| | | 
+| | |     update Navigation bar
+| | |     
+| | |     Re-made navigation bar
+| | |     change location of personal css to lower than bootstrap css location
+| | |   
+* | |   commit 4cc2ed7c6e986467824eb6e80459700d8f2ca11c
+|\ \ \  Merge: 21d6fcf 7e90888
+| | | | Author: Alison0816 <86652293+Alison0816@users.noreply.github.com>
+| | | | Date:   Tue May 10 18:02:46 2022 +0800
+| | | | 
+| | | |     Merge pull request #3 from tallandsman/homePage
+| | | |     
+| | | |     Home page
+| | | | 
+* | | | commit 21d6fcf54693de4e048b7c4aabf52fa76f037d82
+| |_|/  Author: Tal Landsman <tallandsman00@gmail.com>
+|/| |   Date:   Tue May 10 15:27:58 2022 +0800
+| | |   
+| | |       directory structure established
+| | | 
+| | * commit a78f747acf79b0a3b52c7a954235bb85bb2387d2
+| | | Author: jordantgiang <jordantgiang@gmail.com>
+| | | Date:   Thu May 12 12:18:02 2022 +0800
+| | | 
+| | |     Completed game mechanics
+| | | 
+| | * commit 2f3bac6afcd89d55968a1c4e319c237760b68cef
+| | | Author: jordantgiang <jordantgiang@gmail.com>
+| | | Date:   Thu May 12 09:47:57 2022 +0800
+| | | 
+| | |     Flood Fill & Game Over implemented
+| | | 
+| | * commit 32d42e655510aa781cc53f2bf139c1c5cf2b6f6a
+| |/  Author: jordantgiang <jordantgiang@gmail.com>
+| |   Date:   Thu May 12 08:39:43 2022 +0800
+| |   
+| |       Shark Generation & Tile Numbers implemented
+| | 
+| * commit 7e90888f2747238ef5ee9b178b18c415a20eedb2
+| | Author: jordantgiang <jordantgiang@gmail.com>
+| | Date:   Tue May 10 16:49:48 2022 +0800
+| | 
+| |     Directory structure of the repo established
+| | 
+| * commit 5cc8c768945769f57102f2eed9b63af252f30589
+|/  Author: jordantgiang <jordantgiang@gmail.com>
+|   Date:   Tue May 10 15:08:52 2022 +0800
+|   
+|       Creating the HTML and CSS for the home page and game board.
+| 
+* commit ad6cf5fe133dec5dfebc5f30d2bc79402562d6ea
+  Author: tallandsman <69620630+tallandsman@users.noreply.github.com>
+  Date:   Fri Apr 8 15:28:10 2022 +0800
+  
+      Initial commit
