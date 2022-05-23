@@ -496,6 +496,19 @@ function endGamePopup(time, win) {
 }
 
 /**
+ * Function that will change the start button into a share button,
+ * that on click will open up the pop-up game result.
+ */
+function startToShare() {
+	let startButton = document.getElementById("startButton");
+	startButton.innerHTML = "SHARE";
+
+	startButton.classList = "no-game buttons responsive-font";
+
+	$("#startButton").on("click", endGamePopup);
+}
+
+/**
  * Function that triggers the game winning set of actions.
  */
 function gameWin() {
@@ -516,6 +529,8 @@ function gameWin() {
 	setTimeout(function() {
 		endGamePopup(time, win)
 	}, popupDelay);
+
+	startToShare();
 }
 
 /**
@@ -542,6 +557,8 @@ function gameOver() {
 	setTimeout(function() {
 		endGamePopup(time, win)
 	}, popupDelay);
+
+	startToShare();
 }
 
 /**
