@@ -32,6 +32,8 @@ Once running, the application should be accessible on **localhost** on port 5000
 - http://localhost:5000/index
 
 ## Executing Tests
+To execute the testing script, from the 'app' directory run the following command:
+- `python3 test_models.py`
 
 ## Deployment
 via localhost
